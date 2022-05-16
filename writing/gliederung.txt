@@ -1,0 +1,43 @@
+Titel: Programmieren eines Escape Room Spiels über kryptografische Methoden
+Autor: Medea Emch; G19f
+Betreuuung: Adrian Häfliger
+Fachschaft: Informatik
+
+1. Vorwort
+	- Beweggründe
+	- Danksagung
+
+2. Einleitung
+	- Was ist mein Thema
+	- theoretische Hintergründe (?)
+	- Problemstellung / Projektidee
+	- geplantes Vorgehen
+
+3. Hauptteil
+	- Umsetzung
+	- Dokumentation
+
+4. Reflexion und Zusammenfassung
+	- persönliche Erfahrungen
+	- kritische Beurteilung der eigenen Arbeit
+	- weiterführende Aspekte / mögliche Alternativen
+
+5. Quellenverzeichnis
+
+6. Abbildungs- und Tabellenverzeichnis
+
+7. Redlichkeitserklärung
+	Ich erkläre hiermit, 
+	- dass ich die vorliegende Arbeit selbstständig verfasst und nur die angegebenen Quellen benutzt habe, 
+	- dass ich auf eine eventuelle Mithilfe Dritter in der Arbeit ausdrücklich hinweise, 
+	- dass ich vorgängig die Schulleitung und die betreuende Lehrperson informiere, wenn ich
+		o diese Maturarbeit bzw. Teile oder Zusammenfassungen davon veröffentlichen werde oder
+		o Kopien dieser Arbeit zur weiteren Verbreitung an Dritte aushändigen werde. 
+	- dass mir das Merkblatt ‹Plagiat› sowie auch die Konsequenzen eines Plagiats bekannt sind.
+	Meine Maturaarbeit umfasst (ohne Titelblatt, Inhaltsverzeichnis, Redlichkeitserklärung und Abgabeinformationen, Quellen- und sonstigen Verzeichnissen und Anhang) xyz Zeichen (ohne Leerzeichen). 
+	
+	Ich gebe zu den Maturaarbeitsexemplaren folgende Gegenstände oder Produkte ab: 
+	- Pro Exemplar ein Datenträger mit dem Quellcode und einer fertigen, kompilierten Version des Spiels
+	
+8. Anhang
+	(braucht es evtl gar nicht, da der ganze Code wahrscheinlich gar nicht reinpasst und er sowieso auf einem Datenträger mitabgegeben wird)
