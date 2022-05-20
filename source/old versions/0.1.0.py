@@ -134,9 +134,9 @@ def room1():
 
             if event.type == MOUSEBUTTONDOWN:
                 if left_button.collidepoint(mx, my):
-                    pass
+                    pygame.draw.rect(screen, white, left_button)
                 if right_button.collidepoint(mx, my):
-                    pass
+                    pygame.draw.rect(screen, white, right_button)
         
         wall_n()
 

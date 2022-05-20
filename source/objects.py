@@ -1,47 +1,55 @@
-import pygame, random
+import pygame
 pygame.init()
 
-class Object:
-    '''all objects standing in the rooms'''
-
-    def __init__(self, x, y):
+class Desk():
+    '''just a standard desk. (deco_type = 0 is empty; deco_type = 1 has the hidden number code from room 1)'''
+    def __init__(self, x, y, deco_type = 0):
         self.x = x
         self.y = y
-
-    def check():
-        pass  
-
-class Desk(Object):
-    '''just a standard desk. (deco_type = 0 is empty; deco_type = 1 has the hidden number code from room 1)'''
-
-    def __init__(self, x, y, deco_type = 0):
-        super().__init__(x, y)
         self.type = deco_type
 
-class Lamp(Object):
-    '''a normal lamp that can be switched on (state = 1) and off (state = 0)'''
+    def interaction():
+        pass
 
-    def __init__(self, x, y, state):
-        super().__init__(x, y)
+class Lamp():
+    '''a normal lamp that can be switched on (state = True) and off (state = False)'''
+    def __init__(self, x, y, state = False):
+        self.x = x
+        self.y = y
         self.state = state
+    
+    def interaction(self):
+        self.state = not self.state
 
-class Shelf(Object):
-    '''a shelf for decoration'''
-
+class Shelf():
+    '''a shelf for decoration. (deco_type = 0 is full with books; deco_type = 1 has a UV torch which you can pick up'''
     def __init__(self, x, y, deco_type = 0):
-        super().__init__(x, y)
+        self.x = x
+        self.y = y
         self.type = deco_type
+    
+    def interaction():
+        pass
 
-class Door(Object):
+class Door():
     '''the door to leave the room. can be open (state = 1) or closed (state = 0)'''
-
-    def __init__(self, x, y, code, open = False):
-        super().__init__(x, y)
+    def __init__(self, x, y, code, opened = False):
+        self.x = x
+        self.y = y
         self.code = code
+        self.open = opened
 
-class Keypad(Object):
+        return 
+    
+    def interaction():
+        pass
+
+class Keypad():
     '''where you enter the code to open the door'''
-
     def __init__(self, x, y, code):
-        super().__init__(x, y)
+        self.x = x
+        self.y = y
         self.code = code
+    
+    def interaction():
+        
