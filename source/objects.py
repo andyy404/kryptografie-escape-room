@@ -8,8 +8,21 @@ class Desk():
         self.y = y
         self.type = deco_type
 
+    def return_pos(self):
+        return ((self.x, self.y))
+
     def interaction():
         pass
+
+    def front(self, points):
+        A, B, C, D = points
+
+    def side(self, points):
+        A, B, C, D = points
+
+    def top(self, points):
+        A, B, C, D = points
+
 
 class Lamp():
     '''a normal lamp that can be switched on (state = True) and off (state = False)'''
@@ -17,9 +30,22 @@ class Lamp():
         self.x = x
         self.y = y
         self.state = state
-    
+
+    def return_pos(self):
+        return ((self.x, self.y))
+
     def interaction(self):
         self.state = not self.state
+
+    def front(self, points):
+        A, B, C, D = points
+
+    def side(self, points):
+        A, B, C, D = points
+
+    def top(self, points):
+        A, B, C, D = points
+
 
 class Shelf():
     '''a shelf for decoration. (deco_type = 0 is full with books; deco_type = 1 has a UV torch which you can pick up'''
@@ -27,9 +53,22 @@ class Shelf():
         self.x = x
         self.y = y
         self.type = deco_type
+
+    def return_pos(self):
+        return ((self.x, self.y))
     
     def interaction():
         pass
+
+    def front(self, points):
+        A, B, C, D = points
+
+    def side(self, points):
+        A, B, C, D = points
+
+    def top(self, points):
+        A, B, C, D = points
+
 
 class Door():
     '''the door to leave the room. can be open (state = 1) or closed (state = 0)'''
@@ -39,10 +78,21 @@ class Door():
         self.code = code
         self.open = opened
 
-        return 
+    def return_pos(self):
+        return ((self.x, self.y))
     
     def interaction():
         pass
+
+    def front(self, points):
+        A, B, C, D = points
+
+    def side(self, points):
+        A, B, C, D = points
+
+    def top(self, points):
+        A, B, C, D = points
+
 
 class Keypad():
     '''where you enter the code to open the door'''
@@ -50,6 +100,18 @@ class Keypad():
         self.x = x
         self.y = y
         self.code = code
+
+    def return_pos(self):
+        return ((self.x, self.y))
     
     def interaction():
         pass
+
+    def front(self, points):
+        A, B, C, D = points
+
+    def side(self, points):
+        A, B, C, D = points
+
+    def top(self, points):
+        A, B, C, D = points

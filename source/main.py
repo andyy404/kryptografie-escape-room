@@ -14,6 +14,7 @@ clock = pygame.time.Clock()
 
 w, h = screen.get_size()
 
+# LOAD IMAGES ------------------------------------------------------------
 uv_light_icon = pygame.transform.scale(pygame.image.load(r'assets\light.png'), (int(w/27*2), int(w/27*2)))
 
 titel = pygame.transform.scale(pygame.image.load(r'assets\titel.png'), (int(w/8*6), int(w/8*6/2000*578)))
@@ -32,10 +33,11 @@ uv_color_light = (191, 127, 255)
 uv_color_dark = (63, 0, 127)
 neon_color = (127, 255, 0)
 
+
 dark_theme = [black, gray, white, uv_color_dark]
 light_theme = [white, gray, black, uv_color_light]
 
-color_theme = light_theme
+color_theme = dark_theme # color theme = [background, middle tone, main color, uv]
 
 # BUTTONS ----------------------------------------------------------------
 button_right = pygame.Rect(w/27*26, h/4, w/27, h/2)
@@ -52,6 +54,8 @@ scene = 0 # 0 -> main menu; -1 -> info screen; x -> in room number x
 running = True
 looking_at_wall = 0
 room = None
+mbdown = False
+mdup = False
 
 room1 = [
     [pygame.Rect(w/3, h/3, w/3, h/3), color_theme[0], 0],
@@ -122,7 +126,6 @@ def userinterface():
     if button_uv_light.collidepoint(mx, my) and click:
         uv_light = 2
         pygame.draw.circle(screen, color_theme[3], (w-w/27*3, h-h/27*3), w/27)
-        print("wassup, bitches")
     if uv_light > 0:
         screen.blit(uv_light_icon, (w-w/27*3-w/27, h-h/27*3-w/27))
 
@@ -130,12 +133,10 @@ while running:
     for ev in pygame.event.get():
         if ev.type == QUIT:
             running = not running
-        if ev.type == MOUSEBUTTONDOWN:
-            if ev.button == 0:
-                mbdown = True
+        if ev.type == MOUSEBUTTONDOWN:  
+            mbdown = True
         if ev.type == MOUSEBUTTONUP:
-            if ev.button == 0:
-                mbup = True
+            mbup = True
 
     mx, my = pygame.mouse.get_pos()
     click = pygame.mouse.get_pressed()[0]
@@ -150,7 +151,7 @@ while running:
     if scene == -1:
         info_screen()
 
-    mbdown, mbup = False
+    mbdown, mbup = False, False
 
     pygame.display.flip()
 

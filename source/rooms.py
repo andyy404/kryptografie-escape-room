@@ -1,15 +1,38 @@
 import objects, random, pygame
 from pygame.locals import *
 
+mapping = []
+
 class Room():
     def __init__(self, objectlist, code):
         self.objectlist = objectlist
         self.code = code
 
         # CALCULATE THE DIFFERENT VIEWS
+        # view 0
+        for obj in objectlist:
+            if obj[1] <= 1:
+                pass                
 
+        # view 1
+        for obj in objectlist:
+            if obj[0] >= 3:
+                pass
 
-        return [[], [], [], []]
+        # view 2
+        for obj in objectlist:
+            if obj[1] >= 3:
+                pass
+
+        # view 3
+        for obj in objectlist:
+            if obj[0] <= 1:
+                pass
+
+        self.draw_list = [[], [], [], []]
+
+    def return_list(self):
+        return self.draw_list
 
     def turn_right(self):
         global looking_at_wall
