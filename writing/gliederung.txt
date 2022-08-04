@@ -9,11 +9,11 @@ Fachschaft: Informatik
 
 2. Einleitung
 	- Was ist mein Thema
-	- theoretische Hintergründe (?)
 	- Problemstellung / Projektidee
 	- geplantes Vorgehen
 
 3. Hauptteil
+	- theoretische Hintergründe (Kryptografie)
 	- Umsetzung
 	- Dokumentation
 
