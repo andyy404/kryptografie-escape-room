@@ -1,6 +1,6 @@
 
 #! IMPORTS --------------------------------------------------------------------------------------------------------------------
-import pygame, random
+import pygame
 from pygame.locals import *
 import rooms
 
@@ -13,12 +13,9 @@ pygame.display.set_icon(pygame.image.load(r'assets\icon.png')) #changes the icon
 pygame.display.set_caption('Kryptografie Escape Room') # changes the window name in the taskbar
 
 clock = pygame.time.Clock() # makes it possible to force a certain frame rate (is mostly useful when in game movements are tied to frames, which isn't the case here)
-
-w, h = screen.get_size() # gets the size of the window so the size of buttons and icons can be done accordingly
-
-running = True # defines whether the main loop gets looped or not
-
 fps = 60
+w, h = screen.get_size() # gets the size of the window so the size of buttons and icons can be done accordingly
+running = True # defines whether the main loop gets looped or not
 
 
 #! LOAD IMAGES ----------------------------------------------------------------------------------------------------------------
@@ -29,20 +26,22 @@ info_icon = pygame.transform.scale(pygame.image.load(r'assets\info.png'), (int(h
 door = pygame.transform.scale(pygame.image.load(r'assets\quit.png'), (int(h/27*3), int(h/27*3))) # quit game icon in the main menu
 start_text = pygame.transform.scale(pygame.image.load(r'assets\start.png'), (int(h/27*4/526*1159), int(h/27*4))) # start button text icon in the main menu
 
+continue_text = pygame.transform.scale(pygame.image.load(r'assets\continue.png'), (int(h/27*3/578*1944), int(h/27*3)))
+handbook_text = pygame.transform.scale(pygame.image.load(r'assets\handbook.png'), (int(h/27*3/613*2210), int(h/27*3)))
+main_menu_text = pygame.transform.scale(pygame.image.load(r'assets\mainmenu.png'), (int(h/27*3/392*1848), int(h/27*3)))
+
 
 #! COLORS ---------------------------------------------------------------------------------------------------------------------
 black = (0, 0, 0)
 gray = (127, 127, 127)
 white = (255, 255, 255)
 
-uv_color = (127, 0, 255)
-uv_color_light = (191, 127, 255)
-uv_color_dark = (63, 0, 127)
-neon_color = (127, 255, 0) # contrast color (opposite of uv_color)
+red = (255, 0, 0)
 
-#? #FIXME fix this color theme shit / think abt it at least (esp considering the new uv light mechanic)
-dark_theme = [black, gray, white, uv_color_dark, uv_color_light] # color theme = [background color, middle tone, object color, uv light color, color of uv reactive paint under uv light]
-light_theme = [white, gray, black, uv_color_light, uv_color_light]
+uv_color = (127, 0, 255)
+
+dark_theme = [black, gray, white, uv_color] # color theme = [background color, middle tone, object color, uv light color, color of uv reactive paint under uv light]
+light_theme = [white, gray, black, uv_color]
 
 color_theme = dark_theme # game switches between these color themes, depending whether the room's lamp is on or off (light theme -> on, dark theme -> off)
 
@@ -56,22 +55,33 @@ button_menu_play = pygame.Rect(w/2-w/8, h/27*17, w/4, h/27*4) # main menu button
 button_menu_quit = pygame.Rect(w-h/27*4, h-h/27*4, h/27*3, h/27*3) # main menu button to quit game
 button_menu_info = pygame.Rect(h/27, h-h/27*4, h/27*3, h/27*3) # main menu button to get to the info screen
 
-button_back = pygame.Rect(h/27, h/27, h/27*3, h/27*3) # the back button  in the infor screen and the pause menu (also the pause button in game)
+button_back = pygame.Rect(h/27, h/27, h/27*3, h/27*3) # the back button in the info screen and the pause menu (also the pause button in game)
+timer_rect = pygame.Rect(w/2-h/27*3.5, h/27, h/27*7, h/27*3) # the rectangle around the in game timer
 
-timer_rect = pygame.Rect(w/2-h/27*3.5, h/27, h/27*7, h/27*3)
+button_paused_continue = pygame.Rect(w/2-h/27*8, h/27*14, h/27*16, h/27*3)
+button_paused_handbook = pygame.Rect(w/2-h/27*8, h/27*18, h/27*16, h/27*3)
+button_paused_main_menu = pygame.Rect(w/2-h/27*8, h/27*22, h/27*16, h/27*3)
+
+pause_icon_l = pygame.Rect(h/27/5*8, h/27/5*8, h/27/5*3, h/27/5*3*3)
+pause_icon_r = pygame.Rect(h/27/5*14, h/27/5*8, h/27/5*3, h/27/5*3*3)
+
 
 #! GAME CONSTANTS -------------------------------------------------------------------------------------------------------------
-room1_code = random.randint(10000, 99999) # the code to the lock that needs to be cracked to get to room 2
 info_screen_text = [''] # the text shown on the info screen (every new list in the list is a new tab, every new item within that is a new line)
 default_timer_time = 15*60*fps # calculated in frames (minutes times 60 times the amount of frames per second)
 
-#! GAME variables
-uv_light = 1 # 0 -> do not have it; 1 -> have it but it's off; 2 -> have it and it's  on
-scene = 0 # 0 -> main menu; -1 -> info screen; x -> in room number x
+
+#! GAME VARIABLES -------------------------------------------------------------------------------------------------------------
+uv_light = 1 # 0 -> do not have it; 1 -> have it but it's off; 2 -> have it and it's on
+scene = 0 # 0 -> main menu; -1 -> info screen; -2 -> handbook; x -> in room x of the game
 looking_at_wall = 0 # which way you are facing (there is 4 walls, 0, 1, 2 & 3) you start looking at wall 0 and the door is always on wall 0
 mbdown, mbup= False, False # these variables show whether there was a mouse button down or mouse button up event in the current frame (if a mouse button got clicked or released)
+
 room = None # contaims the current room object
+
 paused = False # whether the game is paused or not
+timer_running = False # whether the timer is running or not
+timer_time = default_timer_time # sets the current time to the default starting time
 
 
 #! FUNCTIONS ------------------------------------------------------------------------------------------------------------------
@@ -99,7 +109,8 @@ def menu(): # shows the main menu screen
     
     if mbdown and button_menu_play.collidepoint((mx, my)): # if a mouse button is clicked while the cursor is over a button, the scene will switch to the correct one
         scene = 1
-        paused = False 
+        paused = False
+        #? room = Room1 #FIXME once the room stuff works, remove the comment
     if mbdown and button_menu_info.collidepoint((mx, my)):
         scene = -1
     if mbdown and button_menu_quit.collidepoint((mx, my)):
@@ -120,12 +131,16 @@ def info_screen():
     if mbdown and button_back.collidepoint((mx, my)): # if a mouse button is clicked while the cursor is over the button, the scene will switch back to the main menu
         scene = 0
 
-    #? TEXT #ADDHERE text rendering
+    #? TEXT #ADDHERE text rendering (actually fuck text rendering. you're allowed to do it without the text rendering)
+    pass
+
+
+def handbook():
     pass
 
 
 def userinterface(): # draws the user interface over everything if you are in game
-    global uv_light, paused
+    global running, uv_light, paused, timer_running, scene
     
     #! UV LIGHT
     if button_uv_light.collidepoint(mx, my) and mbdown and uv_light == 1 and not paused: # if the uv light icon gets clicked while the player has the uv light, the light will get turned on
@@ -170,10 +185,40 @@ def userinterface(): # draws the user interface over everything if you are in ga
 
     #! PAUSE MENU
     if paused:
-        if color_theme == light_theme:
-            screen.fill(gray, None, BLEND_MULT)
-        if color_theme == dark_theme:
-            screen.fill(gray, None, BLEND_ADD)
+        screen.fill(color_theme[1])
+
+        pygame.draw.rect(screen, color_theme[0], button_paused_continue)
+        pygame.draw.rect(screen, color_theme[0], button_paused_handbook)
+        pygame.draw.rect(screen, color_theme[0], button_paused_main_menu)
+        pygame.draw.rect(screen, color_theme[0], button_menu_quit)
+
+        if button_paused_continue.collidepoint((mx, my)): # if the cursor is hovering over one of the buttons, it will light up gray
+            pygame.draw.rect(screen, gray, button_paused_continue)
+        if button_paused_handbook.collidepoint((mx, my)):
+            pygame.draw.rect(screen, gray, button_paused_handbook)
+        if button_paused_main_menu.collidepoint((mx, my)):
+            pygame.draw.rect(screen, gray, button_paused_main_menu)
+        if button_menu_quit.collidepoint((mx, my)):
+            pygame.draw.rect(screen, gray, button_menu_quit)
+    
+        pygame.draw.rect(screen, color_theme[2], button_paused_continue, 2) # draws the outlines of all three buttons in the object color
+        pygame.draw.rect(screen, color_theme[2], button_paused_handbook, 2)
+        pygame.draw.rect(screen, color_theme[2], button_paused_main_menu, 2)
+        pygame.draw.rect(screen, color_theme[2], button_menu_quit, 2)
+    
+        screen.blit(continue_text, (w/2-h/27*3/578*1944/2, h/27*14)) # draws all the icons and button texts
+        screen.blit(handbook_text, (w/2-h/27*3/613*2210/2, h/27*18))
+        screen.blit(main_menu_text, (w/2-h/27*3/392*1848/2, h/27*22))
+        screen.blit(door, (w-h/27*4, h-h/27*4))
+        
+        if mbdown and button_paused_continue.collidepoint((mx, my)): # if a mouse button is clicked while the cursor is over a button, the scene will switch to the correct one
+            paused = False
+        if mbdown and button_paused_handbook.collidepoint((mx, my)):
+            scene = -2
+        if mbdown and button_paused_main_menu.collidepoint((mx, my)):
+            scene = 0
+        if mbdown and button_menu_quit.collidepoint((mx, my)):
+            running = not running
 
     #! PAUSE BUTTON
     pygame.draw.rect(screen, color_theme[0], button_back)
@@ -186,6 +231,10 @@ def userinterface(): # draws the user interface over everything if you are in ga
 
         if mbdown:
             paused = not paused
+            timer_running = not paused
+        
+    pygame.draw.rect(screen, color_theme[2], pause_icon_l)
+    pygame.draw.rect(screen, color_theme[2], pause_icon_r)
     
     pygame.draw.rect(screen, color_theme[2], button_back, 2) # the button is outlined in the opposite of the background color
 
@@ -212,10 +261,14 @@ while running:
     if scene > 0: # if this is true, it means you are in game
         #? room.render() #FIXME once the room stuff works, remove the comment
         userinterface()
+        #? room.render_uv_stuff() #FIXME once the room stuff works, remove the comment 
     if scene == 0: # renders the main menu
         menu()
     if scene == -1: # render the info screen
         info_screen()
+    if scene == -2: #render the handbook
+        handbook()
+
 
     mbdown, mbup = False, False # reset mouse button variables
 

@@ -42,6 +42,12 @@ class Room():
         global looking_at_wall
         looking_at_wall = (looking_at_wall - 1) % 4 
 
+    def render(self):
+        pass
+
+    def render_uv_stuff(self): # needs to be seperate from render() because this needs to be drawn after the uv light and the objects need to be drawn before
+        pass #draws everything uv reactive in red with the special flag sub
+
 
 class Room1(Room):
     def __init__(self):
