@@ -42,3 +42,15 @@
 				2.1.4.2.	ROT13
 							ROT13 ist eine weitere Variante der Caesar-Verschlüsselung die den gleichen Prozess zum Verschlüsseln und Entschlüsseln benutzt. Hier sind die Buchstaben zwar wie in der normalen Caesar-Verschlüsselung verschoben, aber genau um ein halbes Alphabet, also 13 Stellen. Wenn man also ein Buchstabe verschlüsselt (um 13 Stellen verschiebt) und entschlüsselt (um weitere 13 Stellen verschiebt), hat man den Buchstaben um insgesamt 26 Stellen, also ein ganzes Alphabet verschoben, womit man wieder beim Ausgangsbuchstaben landet.
 							(Beispiel einfügen)
+							
+	2.2.	Vigenère-Verschlüsselung
+		2.2.1.	Wie es funktioniert
+				fdgsdfg
+		2.2.1.	Geschichte
+				sdftadfgdfg
+		2.2.3.	Sicherheit
+				sdftsdfgdfg
+		2.2.4.	Varianten
+				2.2.4.1.	asdfsdf
+							dasdgsg
+				2.2

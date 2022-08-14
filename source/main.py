@@ -1,3 +1,6 @@
+# kryptografie escape room
+# programmiert von Medea Emch im Rahmen einer Maturaarbeit an der Kantonsschule Alpenquai Luzern im Jahr 2022
+
 
 #! IMPORTS --------------------------------------------------------------------------------------------------------------------
 import pygame
@@ -27,8 +30,11 @@ door = pygame.transform.scale(pygame.image.load(r'assets\quit.png'), (int(h/27*3
 start_text = pygame.transform.scale(pygame.image.load(r'assets\start.png'), (int(h/27*4/526*1159), int(h/27*4))) # start button text icon in the main menu
 
 continue_text = pygame.transform.scale(pygame.image.load(r'assets\continue.png'), (int(h/27*3/578*1944), int(h/27*3)))
-handbook_text = pygame.transform.scale(pygame.image.load(r'assets\handbook.png'), (int(h/27*3/613*2210), int(h/27*3)))
 main_menu_text = pygame.transform.scale(pygame.image.load(r'assets\mainmenu.png'), (int(h/27*3/392*1848), int(h/27*3)))
+
+continue_b_text = pygame.transform.scale(pygame.image.load(r'assets\continue_black.png'), (int(h/27*3/578*1944), int(h/27*3)))
+main_menu_b_text = pygame.transform.scale(pygame.image.load(r'assets\mainmenu_black.png'), (int(h/27*3/392*1848), int(h/27*3)))
+door_b = pygame.transform.scale(pygame.image.load(r'assets\quit_black.png'), (int(h/27*3), int(h/27*3)))
 
 
 #! COLORS ---------------------------------------------------------------------------------------------------------------------
@@ -43,7 +49,7 @@ uv_color = (127, 0, 255)
 dark_theme = [black, gray, white, uv_color] # color theme = [background color, middle tone, object color, uv light color, color of uv reactive paint under uv light]
 light_theme = [white, gray, black, uv_color]
 
-color_theme = dark_theme # game switches between these color themes, depending whether the room's lamp is on or off (light theme -> on, dark theme -> off)
+color_theme = light_theme # game switches between these color themes, depending whether the room's lamp is on or off (light theme -> on, dark theme -> off)
 
 
 #! IMPORTANT RECTANGLES (left edge, upper edge, width, height) ----------------------------------------------------------------
@@ -58,8 +64,7 @@ button_menu_info = pygame.Rect(h/27, h-h/27*4, h/27*3, h/27*3) # main menu butto
 button_back = pygame.Rect(h/27, h/27, h/27*3, h/27*3) # the back button in the info screen and the pause menu (also the pause button in game)
 timer_rect = pygame.Rect(w/2-h/27*3.5, h/27, h/27*7, h/27*3) # the rectangle around the in game timer
 
-button_paused_continue = pygame.Rect(w/2-h/27*8, h/27*14, h/27*16, h/27*3)
-button_paused_handbook = pygame.Rect(w/2-h/27*8, h/27*18, h/27*16, h/27*3)
+button_paused_continue = pygame.Rect(w/2-h/27*8, h/27*18, h/27*16, h/27*3)
 button_paused_main_menu = pygame.Rect(w/2-h/27*8, h/27*22, h/27*16, h/27*3)
 
 pause_icon_l = pygame.Rect(h/27/5*8, h/27/5*8, h/27/5*3, h/27/5*3*3)
@@ -70,10 +75,15 @@ pause_icon_r = pygame.Rect(h/27/5*14, h/27/5*8, h/27/5*3, h/27/5*3*3)
 info_screen_text = [''] # the text shown on the info screen (every new list in the list is a new tab, every new item within that is a new line)
 default_timer_time = 15*60*fps # calculated in frames (minutes times 60 times the amount of frames per second)
 
+words_list = [
+    "Diskussion", "Ausgang", "Bedeutung", "Kontext", "Autobahn", "Professor", "Argument", "Hausaufgaben", "Assistent", "Zeichnung", "Situation", "Fahrstuhl", "Spiegelung", "Wissenschaft", "Zugabe", "Organisation", "Eindruck", "Variation", "Anerkennung", "Interaktion"]
+
+rooms_list = [rooms.Room1, rooms.Room2, rooms.Room3]
+
 
 #! GAME VARIABLES -------------------------------------------------------------------------------------------------------------
 uv_light = 1 # 0 -> do not have it; 1 -> have it but it's off; 2 -> have it and it's on
-scene = 0 # 0 -> main menu; -1 -> info screen; -2 -> handbook; x -> in room x of the game
+scene = 0 # 0 -> main menu; -1 -> info screen; x -> in room x of the game
 looking_at_wall = 0 # which way you are facing (there is 4 walls, 0, 1, 2 & 3) you start looking at wall 0 and the door is always on wall 0
 mbdown, mbup= False, False # these variables show whether there was a mouse button down or mouse button up event in the current frame (if a mouse button got clicked or released)
 
@@ -110,7 +120,7 @@ def menu(): # shows the main menu screen
     if mbdown and button_menu_play.collidepoint((mx, my)): # if a mouse button is clicked while the cursor is over a button, the scene will switch to the correct one
         scene = 1
         paused = False
-        #? room = Room1 #FIXME once the room stuff works, remove the comment
+        room = rooms_list[0]
     if mbdown and button_menu_info.collidepoint((mx, my)):
         scene = -1
     if mbdown and button_menu_quit.collidepoint((mx, my)):
@@ -135,10 +145,6 @@ def info_screen():
     pass
 
 
-def handbook():
-    pass
-
-
 def userinterface(): # draws the user interface over everything if you are in game
     global running, uv_light, paused, timer_running, scene
     
@@ -155,66 +161,37 @@ def userinterface(): # draws the user interface over everything if you are in ga
     if uv_light == 1: # when the light is off, the light icon is drawn in the corner
         screen.blit(uv_light_icon, (w-w/27*3-w/27, h-h/27*3-w/27))
 
-    #! SIDE BUTTONS (BUTTONS TO TURN RIGHT AND LEFT)
-    pygame.draw.rect(screen, color_theme[0], button_right) # makes the buttons background the same color as the background
-    pygame.draw.rect(screen, color_theme[0], button_left)
-
-    # RIGHT
-    if button_right.collidepoint(mx, my):
-        if click:
-            pygame.draw.rect(screen, color_theme[2], button_right) # when the the mouse is pressed down while hovering over the button, the button will light up in the opposite of the background color
-        else:
-            pygame.draw.rect(screen, color_theme[1], button_right) # when the mouse is hovering over the button, it will light up in the midtone (gray)
-        if mbdown and not paused:
-            #? room.turn_right() # when the button is directly clicked, you turn right #FIXME once the room stuff works, remove the comment
-            pass
-
-    pygame.draw.rect(screen, color_theme[2], button_right, 2) # the button is outlined in the opposite of the background color
-
-    # LEFT
-    if button_left.collidepoint(mx, my):
-        if click:
-            pygame.draw.rect(screen, color_theme[2], button_left) # when the the mouse is pressed down while hovering over the button, the button will light up in the opposite of the background color
-        else:
-            pygame.draw.rect(screen, color_theme[1], button_left) # when the mouse is hovering over the button, it will light up in the midtone (gray)
-        if mbdown and not paused:
-            #? room.turn_left() # when the button is directly clicked, you turn left #FIXME once the room stuff works, remove the comment
-            pass
-    
-    pygame.draw.rect(screen, color_theme[2], button_left, 2) # the button is outlined in the opposite of the background color
-
     #! PAUSE MENU
     if paused:
         screen.fill(color_theme[1])
 
-        pygame.draw.rect(screen, color_theme[0], button_paused_continue)
-        pygame.draw.rect(screen, color_theme[0], button_paused_handbook)
+        pygame.draw.rect(screen, color_theme[0], button_paused_continue) # makes all button backgrounds black
         pygame.draw.rect(screen, color_theme[0], button_paused_main_menu)
         pygame.draw.rect(screen, color_theme[0], button_menu_quit)
 
         if button_paused_continue.collidepoint((mx, my)): # if the cursor is hovering over one of the buttons, it will light up gray
             pygame.draw.rect(screen, gray, button_paused_continue)
-        if button_paused_handbook.collidepoint((mx, my)):
-            pygame.draw.rect(screen, gray, button_paused_handbook)
         if button_paused_main_menu.collidepoint((mx, my)):
             pygame.draw.rect(screen, gray, button_paused_main_menu)
         if button_menu_quit.collidepoint((mx, my)):
             pygame.draw.rect(screen, gray, button_menu_quit)
-    
+
         pygame.draw.rect(screen, color_theme[2], button_paused_continue, 2) # draws the outlines of all three buttons in the object color
-        pygame.draw.rect(screen, color_theme[2], button_paused_handbook, 2)
         pygame.draw.rect(screen, color_theme[2], button_paused_main_menu, 2)
         pygame.draw.rect(screen, color_theme[2], button_menu_quit, 2)
     
-        screen.blit(continue_text, (w/2-h/27*3/578*1944/2, h/27*14)) # draws all the icons and button texts
-        screen.blit(handbook_text, (w/2-h/27*3/613*2210/2, h/27*18))
-        screen.blit(main_menu_text, (w/2-h/27*3/392*1848/2, h/27*22))
-        screen.blit(door, (w-h/27*4, h-h/27*4))
+        if color_theme == dark_theme:
+            screen.blit(continue_text, (w/2-h/27*3/578*1944/2, h/27*18)) # draws all the icons and button texts
+            screen.blit(main_menu_text, (w/2-h/27*3/392*1848/2, h/27*22))
+            screen.blit(door, (w-h/27*4, h-h/27*4))
+
+        elif color_theme == light_theme:
+            screen.blit(continue_b_text, (w/2-h/27*3/578*1944/2, h/27*18)) # draws all the icons and button texts
+            screen.blit(main_menu_b_text, (w/2-h/27*3/392*1848/2, h/27*22))
+            screen.blit(door_b, (w-h/27*4, h-h/27*4))
         
         if mbdown and button_paused_continue.collidepoint((mx, my)): # if a mouse button is clicked while the cursor is over a button, the scene will switch to the correct one
             paused = False
-        if mbdown and button_paused_handbook.collidepoint((mx, my)):
-            scene = -2
         if mbdown and button_paused_main_menu.collidepoint((mx, my)):
             scene = 0
         if mbdown and button_menu_quit.collidepoint((mx, my)):
@@ -241,6 +218,8 @@ def userinterface(): # draws the user interface over everything if you are in ga
     #! TIMER
     pygame.draw.rect(screen, color_theme[0], timer_rect)
     pygame.draw.rect(screen, color_theme[2], timer_rect, 2)
+    #? #ADDHERE timer stuff
+    pass
 
 
 #! MAIN LOOP ------------------------------------------------------------------------------------------------------------------
@@ -266,8 +245,6 @@ while running:
         menu()
     if scene == -1: # render the info screen
         info_screen()
-    if scene == -2: #render the handbook
-        handbook()
 
 
     mbdown, mbup = False, False # reset mouse button variables

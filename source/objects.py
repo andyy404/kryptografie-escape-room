@@ -3,26 +3,15 @@ pygame.init()
 
 
 class Desk():
-    '''just a standard desk. (deco_type = 0 is empty; deco_type = 1 has the hidden number code from room 1)'''
-    def __init__(self, x, y, deco_type = 0):
-        self.x = x # x and y are the coordinates in the room, there's 25 positions in the room starting from 0, 0, which is in the northwestern corner
-        self.y = y
+    '''just a standard desk'''
+    def __init__(self, position, deco_type = 0):
+        self.position = position # there's space for 6 objects per room and the spaces are numbered 0 to 5 from left to right
         self.type = deco_type
+        super().__init__(self.position)
 
-    def return_pos(self):
-        return ((self.x, self.y))
-
-    def interaction():
+    def return_drawing():
         pass
 
-    def front(self, points):
-        A, B, C, D = points
-
-    def side(self, points):
-        A, B, C, D = points
-
-    def top(self, points):
-        A, B, C, D = points
 
 
 class Lamp():
@@ -31,21 +20,9 @@ class Lamp():
         self.x = x
         self.y = y
         self.state = state
-
-    def return_pos(self):
-        return ((self.x, self.y))
-
+        
     def interaction(self):
         self.state = not self.state
-
-    def front(self, points):
-        A, B, C, D = points
-
-    def side(self, points):
-        A, B, C, D = points
-
-    def top(self, points):
-        A, B, C, D = points
 
 
 class Shelf():
@@ -54,21 +31,9 @@ class Shelf():
         self.x = x
         self.y = y
         self.type = deco_type
-
-    def return_pos(self):
-        return ((self.x, self.y))
     
     def interaction():
         pass
-
-    def front(self, points):
-        A, B, C, D = points
-
-    def side(self, points):
-        A, B, C, D = points
-
-    def top(self, points):
-        A, B, C, D = points
 
 
 class Door():
@@ -78,21 +43,9 @@ class Door():
         self.y = y
         self.code = code
         self.open = opened
-
-    def return_pos(self):
-        return ((self.x, self.y))
     
     def interaction():
         pass
-
-    def front(self, points):
-        A, B, C, D = points
-
-    def side(self, points):
-        A, B, C, D = points
-
-    def top(self, points):
-        A, B, C, D = points
 
 
 class Keypad():
@@ -101,18 +54,6 @@ class Keypad():
         self.x = x
         self.y = y
         self.code = code
-
-    def return_pos(self):
-        return ((self.x, self.y))
     
     def interaction():
         pass
-
-    def front(self, points):
-        A, B, C, D = points
-
-    def side(self, points):
-        A, B, C, D = points
-
-    def top(self, points):
-        A, B, C, D = points
