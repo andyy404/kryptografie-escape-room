@@ -4,59 +4,74 @@ pygame.init()
 
 
 #! OBJECTS --------------------------------------------------------------------------------------------------------------------
+class Shelf():
+    '''a shelf for decoration. (deco_type = 0 is full with books; deco_type = 1 has a UV flashlight which you can pick up'''
+    def __init__(self, position, deco_type = 0):
+        self.position = position # there's space for 6 objects per room and the spaces are numbered 0 to 5 from left to right
+        self.type = deco_type
+    
+    def interaction():
+        pass
+
+    def return_drawing():
+        pass
+
 class Desk():
     '''just a standard desk'''
     def __init__(self, position, deco_type = 0):
         self.position = position # there's space for 6 objects per room and the spaces are numbered 0 to 5 from left to right
         self.type = deco_type # 2 digit number (first digit says which desk part it is left (0), middle (1), left (2); second digit says what's on the desk)
-        super().__init__(self.position)
+
+    def interaction():
+        pass
+
+    def return_drawing():
+        pass
+
+class Door():
+    '''where you enter the code to open the door'''
+    def __init__(self, position, deco_type, code):
+        self.position = position # there's space for 6 objects per room and the spaces are numbered 0 to 5 from left to right
+        self.type = deco_type
+        self.code = code
+    
+    def interaction():
+        pass
 
     def return_drawing():
         pass
 
 class Lamp():
     '''a normal lamp that can be switched on (state = True) and off (state = False)'''
-    def __init__(self, x, y, state = False):
-        self.x = x
-        self.y = y
-        self.state = state
+    def __init__(self, position):
+        self.position = position # there's space for 6 objects per room and the spaces are numbered 0 to 5 from left to right
+        self.state = True # True = on; False = off
         
     def interaction(self):
         self.state = not self.state
+        if varANDfunc.color_theme == varANDfunc.light_theme:
+            varANDfunc.color_theme = varANDfunc.dark_theme
+        else:
+            varANDfunc.color_theme = varANDfunc.light_theme
 
-class Shelf():
-    '''a shelf for decoration. (deco_type = 0 is full with books; deco_type = 1 has a UV flashlight which you can pick up'''
-    def __init__(self, x, y, deco_type = 0):
-        self.x = x
-        self.y = y
-        self.type = deco_type
-    
-    def interaction():
-        pass
-
-class Door():
-    '''where you enter the code to open the door'''
-    def __init__(self, x, y, code):
-        self.x = x
-        self.y = y
-        self.code = code
-    
-    def interaction():
+    def return_drawing():
         pass
 
 class Calendar():
     def __init__(self, position, deco_type = 0):
         self.position = position # there's space for 6 objects per room and the spaces are numbered 0 to 5 from left to right
         self.type = deco_type # 2 digit number (first digit says which desk part it is left (0), middle (1), left (2); second digit says what's on the desk)
-        super().__init__(self.position)
+
+    def interaction():
+        pass
 
     def return_drawing():
         pass
 
 #! ROOMS ----------------------------------------------------------------------------------------------------------------------
 class Room():
-    def __init__(self, objectlist, code):
-        self.objectlist = objectlist
+    def __init__(self, drawing_list, code):
+        self.drawing_list = drawing_list
         self.code = code
 
     def return_list(self):
@@ -71,8 +86,7 @@ class Room():
         looking_at_wall = (looking_at_wall - 1) % 4 
 
     def render(self):
-        pass
-        
+        pygame.draw.polygon(varANDfunc.screen, varANDfunc.color_theme[0], self.drawing_list[0])
 
     def render_uv_stuff(self): # needs to be seperate from render() because this needs to be drawn after the uv light and the objects need to be drawn before
         pass #draws everything uv reactive in red with the special flag sub
@@ -81,7 +95,7 @@ class Room1(Room):
     def __init__(self):
         self.code = random.randint(10000, 99999)
 
-        self.objectlist = [
+        self.objectlist = [ #? #FIXME add all the right parameters to these objects
             Shelf(0),
             Door(5, self.code),
             Shelf(1),
@@ -92,17 +106,14 @@ class Room1(Room):
         for obj in self.object_list:
             self.drawing_list.append(obj.return_drawing())
 
-        super().__init__(self.objectlist, self.code)
-
-    def render(self):
-        pygame.draw.polygon(varANDfunc.screen, varANDfunc.color_theme)
+        super().__init__(self.drawing_list, self.code)
 
 class Room2(Room):
     def __init__(self):
         self.code = random.choice(main.words_list)
         self.key = random.choice(main.words_list)
 
-        self.objectlist = [
+        self.objectlist = [ #? #FIXME add all the right parameters to these objects
             Door(0, self.code),
             Shelf(5),
             Lamp(1),
@@ -110,13 +121,16 @@ class Room2(Room):
             Calendar(2),
             Desk(3)]
 
-        super().__init__(self.objectlist, self.code)
+        for obj in self.object_list:
+            self.drawing_list.append(obj.return_drawing())
+
+        super().__init__(self.drawing_list, self.code)
 
 class Room3(Room):
     def __init__(self):
         self.code = random.randint(10000, 99999)
 
-        self.objectlist = [
+        self.objectlist = [ #? #FIXME add all the right parameters to these objects
             Desk(0),
             Shelf(5),
             Desk(1),
@@ -124,4 +138,7 @@ class Room3(Room):
             Door(2),
             Lamp(3)]
 
-        super().__init__(self.objectlist, self.code)
+        for obj in self.object_list:
+            self.drawing_list.append(obj.return_drawing())
+
+        super().__init__(self.drawing_list, self.code)
