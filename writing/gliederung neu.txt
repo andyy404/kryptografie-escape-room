@@ -1,0 +1,50 @@
+0. Abstract
+	- Überblick
+	- Was habe ich gemacht, was ist dabei herausgekommen, was bedeutet dieses Resultat
+1. Vorwort
+	- Beweggründe (Wie bin ich zum Thema gekommen)
+	- Danksagung (Wem will ich wie danken)
+2. Einleitung/Problemstellung
+	- Was ist mein Thema
+	- Erklärung und Relevanz meines Themas
+	- Was ist mein Ziel
+	- gelantes Vorgehen
+	- verwendete Software
+3. Behandelte Kryptografische Methoden
+	- Wie funktioniert es
+	- Kurze Geschichte
+	- Sicherheit
+	- Variationen
+4. Das Escape Room Spiel
+	4.1. Benutzeroberfläche
+		- wie bedient man das spiel?
+		- screenshots des programms
+	4.2. Das Programm
+		4.2.1. Wieso Python?
+			- vorteile & nachteile
+		4.2.2. Klassen und Funktionen
+			- Programmatische Umsetzung der kryptografischen methoden
+			- objekte & räume
+			- menus
+		4.2.3. Einfache Erweiterung
+			- neue objekte
+				- neue objekt subtypen
+			- neue Räume
+			- neue Methoden
+5. Reflexion und Ausblick aka Schlusswort
+	- was ging gut
+		- motivation
+	- was ging nicht gut
+		- oop (neu lernen)
+		- original mit drehen und so
+		- zeitmanagement
+		- probleme auseinanderbrehchen in kleine machbare stücke in einer sinnvollen reihenfolge und nicht 17 sachen gleichzeitig falsch machen
+		- übresicht im code
+		- mehrere files
+		- github
+		- überfordert
+	- ausblick
+		- erweiterbarkeit (siehe 4.2.3.)
+		- bessere grafik (nicht linien und so)
+		- richtig drehen und so
+		- sounds
