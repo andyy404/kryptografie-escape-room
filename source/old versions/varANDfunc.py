@@ -134,7 +134,7 @@ def info_screen():
     if mbdown and button_back.collidepoint((mx, my)): # if a mouse button is clicked while the cursor is over the button, the scene will switch back to the main menu
         scene = 0
 
-    #? TEXT #ADDHERE text rendering (actually fuck text rendering. you're allowed to do it without the text rendering)
+    #? TEXT # text rendering (actually fuck text rendering. you're allowed to do it without the text rendering)
     pass
 
 def userinterface(): # draws the user interface over everything if you are in game
@@ -210,7 +210,7 @@ def userinterface(): # draws the user interface over everything if you are in ga
     #! TIMER
     pygame.draw.rect(screen, color_theme[0], timer_rect)
     pygame.draw.rect(screen, color_theme[2], timer_rect, 2)
-    #? #ADDHERE timer stuff
+    #? # timer stuff
     pass
 
 def check_inputs():

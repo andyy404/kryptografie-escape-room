@@ -99,7 +99,7 @@ class Room1(Room):
     def __init__(self):
         self.code = random.randint(10000, 99999)
 
-        self.objectlist = [ #? #FIXME add all the right parameters to these objects
+        self.objectlist = [ #? # add all the right parameters to these objects
             Shelf(0),
             Door(5, self.code),
             Shelf(1),
@@ -117,7 +117,7 @@ class Room2(Room):
         self.code = random.choice(main.words_list)
         self.key = random.choice(main.words_list)
 
-        self.objectlist = [ #? #FIXME add all the right parameters to these objects
+        self.objectlist = [ #? # add all the right parameters to these objects
             Door(0, self.code),
             Shelf(5),
             Lamp(1),
@@ -134,7 +134,7 @@ class Room3(Room):
     def __init__(self):
         self.code = random.randint(10000, 99999)
 
-        self.objectlist = [ #? #FIXME add all the right parameters to these objects
+        self.objectlist = [ #? # add all the right parameters to these objects
             Desk(0),
             Shelf(5),
             Desk(1),
