@@ -7,6 +7,8 @@
 
 \usepackage{KSA}[2019/11/14]  % KSA Vorlage, enthält die gängigsten Pakete   
 
+\usepackage{fancyvrb}
+
 
 %___________________________ Definitionen des Literaturverzeichnisses ________
 \usepackage[style=numeric,natbib=true,doi=true,url=true,isbn=true,sorting=none,backend=biber]{biblatex}    % Quellen mit Nummern 
@@ -19,12 +21,12 @@
 
 %___________________________ Definitionen von Glossar ________________________
 %\usepackage[]{glossaries}	        % keine Seitenangaben im Glossar, ohne separates Acronymverzeichnis
-\usepackage[acronym]{glossaries}	% keine Seitenangaben im Glossar, mit separatem Acronymverzeichnis
-\makeglossaries
-\input{Glossar}                     % greift auf Glossar.tex zu, worin alle Glossareinträge definiert sind
+%\usepackage[acronym]{glossaries}	% keine Seitenangaben im Glossar, mit separatem Acronymverzeichnis
+%\makeglossaries
+%\input{Glossar}                     % greift auf Glossar.tex zu, worin alle Glossareinträge definiert sind
 
 %___________________________ Optionen  _______________________________________
-%\hypersetup{allcolors=black} % für den Papierausdruck
+\hypersetup{allcolors=black} % für den Papierausdruck
 \setlength\parskip{2.5ex}     % Abstand zwischen zwei Paragraphen
 \setlength\parindent{0em}     % Einzug eines neuen Paragraphen
 
@@ -36,10 +38,10 @@
 \def\maOrt{Kriens}
 \def\maTitel{Programmieren eines Escape Room Videospiels über kryptografische Methoden} 
 \setlength{\vPositionTitel}{2.0mm} % positive Länge schiebt Titel nach oben
-\setlength{\logoBindung}{0.0mm}    % positive Länge schiebt grosses Logo nach rechts
-\setlength{\bildBindung}{0.0mm}    % positive Länge schiebt linken Bildrand nach rechts
-\def\maTitelfarbe{\color{white}}   % black; Liste weiterer Farben: http://www.math.harvard.edu/computing/latex/color.html
-\def\maTitelbild{\BILDER P1020263}
+\setlength{\logoBindung}{5.0mm}    % positive Länge schiebt grosses Logo nach rechts
+\setlength{\bildBindung}{36.0mm}    % positive Länge schiebt linken Bildrand nach rechts
+\def\maTitelfarbe{\color{black}}   % black; Liste weiterer Farben: http://www.math.harvard.edu/computing/latex/color.html
+\def\maTitelbild{\BILDER weiss}
 \def\maDate{\today}                % am Schluss das fixe Datum einsetzen!
 \def\maBetreuung{Adrian Häfliger, \maFachschaft Informatik}
 \def\maFRAGE{•}

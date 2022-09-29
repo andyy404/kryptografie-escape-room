@@ -1,84 +1,761 @@
 % !TEX root = MA.tex
 \section{Behandelte kryptografische Methoden}
+\label{sec:kryptographische_methoden}
 
-\subsection{Geheimtinte}
+\subsection{Geheimtinte} % done
+\label{sec:geheimtinte}
 
-Die einfachste Art, einen geheimen Text zu vermitteln, ist, wenn er gar nicht erst gesehen werden kann. Dies kann mit verschiedenen Chemikalien erreicht werden, die unter Normalbedingungen farblos sind und entweder durch Hitze, UV-Licht oder chemische Behandlungen sichtbar werden. Diese Art von \enquote{Verschlüsselung} gehört nicht zum Themenbereich der Kryptografie, sondern dem der Steganografie. Diese beschäftigt sich mit dem Verstecken geheimer Nachrichten. Dies geschieht zum Beispiel mit Geheimtinten oder indem die Nachricht in einer anderen nicht geheimen Nachricht versteckt wird. Damit ein \enquote{leeres} Blatt Papier nicht verdächtig erschien, wurde oft eine unschuldige Nachricht darauf geschrieben, mit der Geheimnachricht entweder zwischen den Zeilen oder am Rand des Blattes.
+Die einfachste Art, einen geheimen Text zu vermitteln ist, wenn er gar nicht erst gesehen werden kann. Diese Art von «Verschlüsselung» gehört nicht zum Themenbereich der Kryptografie, sondern zu dem der Steganografie. Diese ist ein benachbartes Feld der Kryptografie, da sie sich ebenfalls mit der Sicherheit von Daten und Nachrichten beschäftigt. Statt wie in der Kryptografie die Nachricht selbst zu verschlüsseln, beschäftigt sich die Steganografie mit dem Verstecken der Daten, Nachrichten oder Kanäle, auf denen sie übertragen werden, sodass sie gar nicht erst in falsche Hände gelangen können. 
 
-Einer der frühesten Autoren, der unsichtbare Tinte erwähnt, ist Aineias Taktikos, ein griechischer Stratege und Militärschriftsteller aus dem 4. Jahrhundert v. Chr. Im alten Griechenland und im römischen Reich wurden Geheimtinten noch zu Kriegszwecken genutzt, da es damals noch keine elektronische Datenübertragung gab und Nachrichten zumeist niedergeschrieben wurden, wofür sich Geheimtinte sehr eignete. Später im 17. bis 19. Jahrhundert erlebten Geheimtinten einen Popularitätsschub, da sie oft benutzt wurden, um geheime Liebesbriefe zu schreiben.
+\subsubsection{Funktionsweise}
+\label{sec:funktionsweise}
+Dies geschieht zum Beispiel mit Geheimtinten, verschiedenen Chemikalien, die unter Normalbedingungen farblos sind und entweder durch Hitze, UV-Licht oder chemische Behandlungen sichtbar werden oder indem die Nachricht in einer anderen nicht geheimen Nachricht versteckt wird. Damit ein «leeres» Blatt Papier nicht verdächtig erscheint, wird oft eine unverfängliche Nachricht darauf geschrieben. Dabei wird die Geheimnachricht entweder zwischen die Zeilen oder auf den Rand des Blattes geschrieben oder es werden mit der Geheimtinte lediglich bestimmte Wörter oder Buchstaben markiert, die anschliessend zusammen die Geheimnachricht ergeben.
 
-Die frühesten Formen von unsichtbaren Tinten waren Milch, über die man, wenn sie angetrocknet war, Kohlestaub oder Asche blasen konnte, der an der getrocktenten Milch kleben blieb und Urin und Fruchtsäfte, deren enthaltene Kohlenhydrate (Kohlenstoff) bei Erwärmung verkohlen und dunkler werden, wie man es auch zum Beispiel beim Verbrennen von Holz beobachten kann. Später begann man auch in der Chemie mehr Möglichkeiten für Geheimtinten zu finden, die zum Teil auch nur auf bestimmte andere Chemikalien reagierten. Ein Besipiel dafür ist Phenolphthaleinlösung, ein bekannter pH-Wert Indikator, der bei einem pH-Wert von 0 bis 8,2 farblos ist. Beim Bestreichen mit einer stärkeren Base wie zum Beispiel einer Ammoniaklösung, wird das Phenolphthalein pink.
+\subsubsection{Geschichte}
+\label{sec:geschichte}
+Einer der frühesten Autoren, der unsichtbare Tinte erwähnt, war Aineias Taktikos, ein griechischer Stratege und Militärschriftsteller aus dem 4. Jahrhundert v. Chr. Im alten Griechenland und im römischen Reich wurden Geheimtinten noch zu Kriegszwecken genutzt, da es damals noch keine elektronische Datenübertragung gab und Nachrichten zumeist niedergeschrieben wurden, wofür sich Geheimtinte sehr eignete. Später, im 17. bis 19. Jahrhundert erlebten Geheimtinten einen Popularitätsschub, um geheime Liebesbriefe zu schreiben. Heutzutage werden Geheimtinten fast ausschliesslich von Kindern für «geheime» Nachrichten genutzt. In der digitalen Welt finden Geheimtinten keine Anwendung, da sie sich nur für physisch niedergeschriebene Nachrichten eignen.
 
-Heutzutage werden Geheimtinten fast ausschliesslich von Kindern für \enquote{geheime} Nachrichten genutzt, da sie in der digitalen Welt kaum Anwendung finden und überhaupt nur sehr schwierig anzuwenden wären, da sie sich fast nur für physisch niedergeschriebene Nachrichten eignen.
+Die frühesten Formen von unsichtbaren Tinten waren Milch, Urin und Fruchtsäfte. Über die angetrocknete Milch blies man Kohlestaub oder Asche, welche am fettigen Rückstand der getrockneten Milch kleben blieben. Milch, Urin und Fruchtsäfte werden dunkler bei Erwärmung, da deren enthaltene Kohlenhydrate (Kohlenstoff) verkohlen, wie man es auch zum Beispiel beim Verbrennen von Holz beobachten kann. Später fand man auch in der Chemie mehr Möglichkeiten für Geheimtinten. Diese sind zumeist Substanzen, die auf bestimmte andere Chemikalien reagieren und sich daraufhin verfärben. Ein Beispiel dafür ist Phenolphthaleinlösung, ein pH-Wert-Indikator, der bei einem pH-Wert von 0 bis 8,2 farblos ist. Beim Bestreichen mit einer stärkeren Base wie zum Beispiel einer Ammoniaklösung, wird das Phenolphthalein pink.
+
 
 \newpage % CAESAR
 \subsection {Caesar-Verschlüsselung}
+\label{sec:caesar-verschluesselung}
 
-Caesar ist eine der simpelsten Verschlüsselungen und wird heute fast ausschliesslich benutzt, um Kryptographie einfach zu erklären, da es für heutige Verwendungen viel zu unsicher ist. 
+Caesar ist eine der simpelsten Verschlüsselungen und wird heute fast ausschliesslich benutzt, um das Prinzip der Kryptografie einfach zu erklären, da sie für heutige Verwendungen viel zu unsicher ist.
 
-Für die Verschlüsselung wird zusätzlich zum Klartextalphabet ein Geheimalphabet benutzt, wobei jeder Buchstabe jeweils einem bestimmten verschlüsselten Buchstaben entspricht.
+Caesar ist eine monoalphabetische Verschlüsselung, bei der ein festes Geheimalphabet benutzt wird und ein Zeichen oder eine Zeichengruppe im Klartext immer dem gleichen Zeichen oder der gleichen Zeichengruppe im Geheimtext entspricht und umgekehrt. Solche Verfahren sind einfach zu benutzen, aber nicht sehr sicher.
 
-Das verschlüsselte Alphabet erhält man, indem man die Zeichen des lateinischen Alphabets um eine bestimmte Anzahl verschiebt (wobei der Anfang des Klartextalphabets zyklisch am Ende des Alphabets angefügt wird, sodass es aufgeht) und jeweils den Klartextbuchstaben mit dem resultierenden Geheimtextbuchstaben ersetzt. Um anzugeben um wie viel das ALphabet verschoben wurde, wird entweder die Anzahl der Stellen oder der Schlüsselbuchstabe (der Buchstabe, durch den A ersetzt wurde) angegeben. 
+Für die Caesar-Verschlüsselung wird ein Klartextalphabet und ein Geheimalphabet benutzt, wobei jeder Buchstabe im Klartextalphabet jeweils dem Buchstaben an derselben Stelle des Geheimalphabets entspricht und mit diesem ersetzt wird.
 
-Beispiel für eine Verschiebung um 10 Buchstaben:
+\subsubsection{Generation des Klartext- und Geheimalphabets}
+\label{sec:c-generation}
+Das verschlüsselte Alphabet erhält man, indem man die Zeichen des lateinischen Alphabets um eine bestimmte Anzahl Stellen verschiebt, wobei der Anfang des Klartextalphabets zyklisch am Ende des Alphabets angefügt wird. Um anzugeben, um wie viel das Alphabet verschoben wurde, wird entweder die Anzahl der Stellen oder der Schlüsselbuchstabe (der Buchstabe, durch den A ersetzt wurde) angegeben.
 
-Somit wird aus dem Wort «BEISPIEL» «LOSCZSOV», wenn es verschlüsselt wird. Um den Geheimtext wieder zu entschlüsseln wird der ganze Vorgang rückwärts angewandt. Der Schlüssel (in diesem Fall K) wird dabei von A ersetzt.
+\begin{table}[]
+\centering
+\caption{Die Generation des Geheimalphabets aus dem Klartextalphabet}
+\label{tab:generation-caesar}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llllllllllllllllllllllllllllllll}
+\cline{7-32}
+ &
+   &
+   &
+   &
+   &
+  \multicolumn{1}{l|}{} &
+  \multicolumn{1}{l|}{A} &
+  \multicolumn{1}{l|}{B} &
+  \multicolumn{1}{l|}{C} &
+  \multicolumn{1}{l|}{D} &
+  \multicolumn{1}{l|}{E} &
+  \multicolumn{1}{l|}{F} &
+  \multicolumn{1}{l|}{G} &
+  \multicolumn{1}{l|}{H} &
+  \multicolumn{1}{l|}{I} &
+  \multicolumn{1}{l|}{J} &
+  \multicolumn{1}{l|}{K} &
+  \multicolumn{1}{l|}{L} &
+  \multicolumn{1}{l|}{M} &
+  \multicolumn{1}{l|}{N} &
+  \multicolumn{1}{l|}{O} &
+  \multicolumn{1}{l|}{P} &
+  \multicolumn{1}{l|}{Q} &
+  \multicolumn{1}{l|}{R} &
+  \multicolumn{1}{l|}{S} &
+  \multicolumn{1}{l|}{T} &
+  \multicolumn{1}{l|}{U} &
+  \multicolumn{1}{l|}{V} &
+  \multicolumn{1}{l|}{W} &
+  \multicolumn{1}{l|}{X} &
+  \multicolumn{1}{l|}{Y} &
+  \multicolumn{1}{l|}{Z} \\ \cline{7-32} 
+ &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+   \\ \cline{1-26}
+\multicolumn{1}{|l|}{A} &
+  \multicolumn{1}{l|}{B} &
+  \multicolumn{1}{l|}{C} &
+  \multicolumn{1}{l|}{D} &
+  \multicolumn{1}{l|}{E} &
+  \multicolumn{1}{l|}{F} &
+  \multicolumn{1}{l|}{G} &
+  \multicolumn{1}{l|}{H} &
+  \multicolumn{1}{l|}{I} &
+  \multicolumn{1}{l|}{J} &
+  \multicolumn{1}{l|}{K} &
+  \multicolumn{1}{l|}{L} &
+  \multicolumn{1}{l|}{M} &
+  \multicolumn{1}{l|}{N} &
+  \multicolumn{1}{l|}{O} &
+  \multicolumn{1}{l|}{P} &
+  \multicolumn{1}{l|}{Q} &
+  \multicolumn{1}{l|}{R} &
+  \multicolumn{1}{l|}{S} &
+  \multicolumn{1}{l|}{T} &
+  \multicolumn{1}{l|}{U} &
+  \multicolumn{1}{l|}{V} &
+  \multicolumn{1}{l|}{W} &
+  \multicolumn{1}{l|}{X} &
+  \multicolumn{1}{l|}{Y} &
+  \multicolumn{1}{l|}{Z} &
+   &
+   &
+   &
+   &
+   &
+   \\ \cline{1-26}
+\end{tabular}%
+}
+\end{table}
 
-Die Caesar-Verschlüsselung kann auch mathematisch dargestellt werden, indem man jedem der 26 Buchstaben eine Zahl zuordnet (A = 0, B = 1, …, Z = 25). Mit diesen Zahlen kann man die Caesar-Verschlüsselung als ganz einfache Addition darstellen. Dazu wird zum Wert des Klartextbuchstabens K einfach der Wert des Schlüsselbuchstabens S addiert.
+Für die Entschlüsselung einer mit Caesar verschlüsselten Nachricht muss aus dem Geheimalphabet wieder das Klartextalphabet gewonnen werden, um den Prozess rückwärts anwenden zu können. Dafür wird das Geheimalphabet um die gleiche Anzahl Stellen zurückverschoben.
+
+\subsubsection{Anwendungsbeispiel}
+\label{sec:c-anwendungsbeispiel}
+
+\begin{table}[]
+\centering
+\caption{Die Chiffrierung nach Caesar aus dem Anwendungsbeispiel}
+\label{tab:chiffrierung-caesar-anwendungsbeispiel}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llllllllllllllllllllllllll}
+\hline
+\multicolumn{1}{|l|}{A} &
+  \multicolumn{1}{l|}{B} &
+  \multicolumn{1}{l|}{C} &
+  \multicolumn{1}{l|}{D} &
+  \multicolumn{1}{l|}{E} &
+  \multicolumn{1}{l|}{F} &
+  \multicolumn{1}{l|}{G} &
+  \multicolumn{1}{l|}{H} &
+  \multicolumn{1}{l|}{I} &
+  \multicolumn{1}{l|}{J} &
+  \multicolumn{1}{l|}{K} &
+  \multicolumn{1}{l|}{L} &
+  \multicolumn{1}{l|}{M} &
+  \multicolumn{1}{l|}{N} &
+  \multicolumn{1}{l|}{O} &
+  \multicolumn{1}{l|}{P} &
+  \multicolumn{1}{l|}{Q} &
+  \multicolumn{1}{l|}{R} &
+  \multicolumn{1}{l|}{S} &
+  \multicolumn{1}{l|}{T} &
+  \multicolumn{1}{l|}{U} &
+  \multicolumn{1}{l|}{V} &
+  \multicolumn{1}{l|}{W} &
+  \multicolumn{1}{l|}{X} &
+  \multicolumn{1}{l|}{Y} &
+  \multicolumn{1}{l|}{Z} \\ \hline
+$\downarrow$ &
+  $\downarrow$ &
+  $\downarrow$ &
+  $\cdots$ &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+   &
+  $\cdots$ &
+  $\downarrow$ \\ \hline
+\multicolumn{1}{|l|}{K} &
+  \multicolumn{1}{l|}{L} &
+  \multicolumn{1}{l|}{M} &
+  \multicolumn{1}{l|}{N} &
+  \multicolumn{1}{l|}{O} &
+  \multicolumn{1}{l|}{P} &
+  \multicolumn{1}{l|}{Q} &
+  \multicolumn{1}{l|}{R} &
+  \multicolumn{1}{l|}{S} &
+  \multicolumn{1}{l|}{T} &
+  \multicolumn{1}{l|}{U} &
+  \multicolumn{1}{l|}{V} &
+  \multicolumn{1}{l|}{W} &
+  \multicolumn{1}{l|}{X} &
+  \multicolumn{1}{l|}{Y} &
+  \multicolumn{1}{l|}{Z} &
+  \multicolumn{1}{l|}{A} &
+  \multicolumn{1}{l|}{B} &
+  \multicolumn{1}{l|}{C} &
+  \multicolumn{1}{l|}{D} &
+  \multicolumn{1}{l|}{E} &
+  \multicolumn{1}{l|}{F} &
+  \multicolumn{1}{l|}{G} &
+  \multicolumn{1}{l|}{H} &
+  \multicolumn{1}{l|}{I} &
+  \multicolumn{1}{l|}{J} \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+Aus dem Wort \enquote{BEISPIEL} wird somit \enquote{LOSCZSOV}, wenn es mit der Schlüsselzahl 10 verschlüsselt wird.
+
+\begin{table}[]
+\centering
+\caption{Verschlüsselung des Wortes "Beispiel" nach Caesar (Schlüsselzahl: 10)}
+\label{tab:verschluesselung-caesar-beispiel-10}
+\begin{tabular}{|l|llllllll|}
+\hline
+Klartext:   & B & E & I & S & P & I & E & L \\ \hline
+Geheimtext: & L & O & S & C & Z & S & O & V \\ \hline
+\end{tabular}%
+\end{table}
+
+Um den Geheimtext wieder zu entschlüsseln wird der ganze Vorgang rückwärts angewandt. Der Schlüssel (in diesem Fall K) wird dabei von A ersetzt.
+
+\subsubsection{Mathematische Darstellung}
+\label{sec:c-mathematische-darstellung}
+Die Caesar-Verschlüsselung kann mathematisch dargestellt werden, indem man jedem der 26 Buchstaben eine Zahl zuordnet (A = 0, B = 1, \ldots, Z = 25). Mit diesen Zahlen kann man die Caesar-Verschlüsselung als ganz einfache Addition darstellen. Dazu wird zum Wert jedes Klartextbuchstabens K\_{i} einfach der Wert des Schlüsselbuchstabens S addiert.
 
 Da es aber Fälle gibt, in denen das Resultat grösser als 25 ist und es keinen Buchstaben mit einem so hohen Wert gibt, muss auf das Resultat eine Modulo-26 Rechnung angewandt werden. Dabei wird der Rest einer Division durch 26 berechnet.
 
-Somit ist die Caesar-Verschlüsselung mathematisch definiert als:
+Somit ist die Caesar-Verschlüsselung mathematisch dargestellt als:
 
-encrypt
+%%%%% Mathematische Formel
 
-Die dazugehörende Entschlüsselung eines Geheimtextbuchstabens G entspricht dann:
+Die dazugehörende Entschlüsselung eines Geheimtextbuchstabens Gi entspricht dann:
 
-decrypt
+%%%%% Mathematische Formel
 
-%Sicherheit
-Da die Caesar-Verschlüsselung eine monoalphabetische Verschlüsselung ist, das heisst, jeder Klartextbuchstabe im Klartextalphabet genau einem Geheimbuchstaben im Geheimalphabet entspricht, kann sie durch Statistik sehr leicht geknackt werden.
-Jede Sprache hat eine charakteristische Verteilung der Buchstaben, die leicht in einem Graph aufgezeichnet werden können:
 
-(Graph von der Buchstabenverteilung in der deutschen Sprache einfügen)
+\subsubsection{Sicherheit}
+\label{sec:c-sicherheit}
+Da die Caesar-Verschlüsselung eine monoalphabetische Verschlüsselung ist, das heisst, jeder Klartextbuchstabe im Klartextalphabet genau einem Geheimbuchstaben im Geheimalphabet entspricht, kann sie durch Statistik sehr leicht geknackt werden. Jede Sprache hat eine charakteristische Verteilung der Buchstaben, die leicht in einem Graph aufgezeichnet werden kann. In der deutschen Sprache sieht diese Verteilung folgendermassen aus:
+
+\begin{figure}[htb]  % Bild Verteilung der Buchstaben in der deutschen Sprache
+	\centering
+		\includegraphics[width=0.7\textwidth]{\BILDER Verteilung der Buchstaben in der deutschen Sprache}
+ 	\caption{Verteilung der Buchstaben in der deutschen Sprache \cite{img:citekey}}
+  \label{fig:verteilung-buchstaben-de}
+\end{figure}
 
 Wenn also das ganze Alphabet um beispielsweise 10 Stellen verschoben wird, sieht die Verteilung folgendermassen aus:
 
-(Graph der Buchstabenverteilung 10 Stellen verschoben einfügen)
+\begin{figure}[htb]  % Bild mit Caesar, 10 Zeichen verschoben, Buchstabenverteilung
+	\centering
+		\includegraphics[width=0.7\textwidth]{\BILDER Bild mit Caesar, 10 Zeichen verschoben, Buchstabenverteilung}
+ 	\caption{Bild mit Caesar, 10 Zeichen verschoben, Buchstabenverteilung \cite{img:citekey}}
+  \label{fig:verteilung-buchstaben-caesar-10}
+\end{figure}
 
-Da der Verlauf des Graphen immer noch derselbe ist und man weiss, dass E der häufigste Buchstabe ist, kann man nun schliessen, dass das O des Geheimalphabets dem E des Klartextalphabets entspricht. So kann man die Verschiebung berechnen und daraus das Klartextalphabet ableiten.
+Da der Verlauf des Graphen immer noch derselbe ist und man weiss, dass E der am häufigsten verwendete Buchstabe der deutschen Sprache ist, kann man daraus schliessen, dass das O des Geheimalphabets dem E des Klartextalphabets entspricht. So kann man die Verschiebung berechnen und daraus das Klartextalphabet ableiten.
 
-Da die Buchstabenverteilung jedoch erst in genügend langen Texten genau ist, sollten einzelne Wörter und kurze Sätze in dieser Hinsicht noch einigermassen sicher sein.
+Da die Buchstabenverteilung jedoch erst in genügend langen Texten ausreichend aussagekräftig ist, sollten einzelne Wörter und kurze Sätze in dieser Hinsicht noch einigermassen sicher sein.
 
-Allerdings ist eine weitere Schwäche der Caesar-Verschlüsselung jedoch, dass es nur 25 mögliche Schlüssel gibt, man also spätestens nach 25 Versuchen den Klartext erhält. Vor dieser Angehensweise sind dann auch kurze Sätze und einzelne Wörter nicht mehr sicher.
+Allerdings ist eine weitere Schwäche der Caesar-Verschlüsselung die Limitierung durch die nur 25 möglichen Schlüssel. Man erhält also, auch wenn man bloss herumprobiert, spätestens nach 25 Versuchen den Klartext. Vor dieser Strategie sind dann auch kurze Sätze und einzelne Wörter nicht sicher.
 
-Im Englischen gibt es zusätzlich noch das Problem, dass es nur zwei Möglichkeiten gibt für Wörter mit einem Buchstaben (\enquote{I} = ich und \enquote{a} = ein), was das Knacken noch zusätzlich beschleunigt, besonders da beides eher häufige Wörter sind.
+Im Englischen gibt es zusätzlich noch das Problem, dass es nur zwei Möglichkeiten gibt für Wörter mit nur einem Buchstaben («I» = ich und «a» = ein), was das Knacken noch zusätzlich beschleunigt, besonders da beides eher häufige Wörter sind. Dies kann aber umgangen werden, indem alle Leerzeichen des Geheimtextes bei der Übermittlung weggelassen werden, wodurch man einzelne Wörter nicht mehr erkennen kann.
 
-\textbf{Atbasch} ist eine ursprünglich auf dem hebräischen Alphabet basierende Variante der Caesar-Verschlüsselung, die auch als umgekehrte Caesar-Verschlüsselung bezeichnet wird, denn statt dass die Buchstaben um eine bestimmte Anzahl Stellen verschoben werden, ist das Geheimalphabet lediglich das Klartextalphabet aber rückwärts, sodass A zu Z wird, B zu Y, und so weiter.
 
-Der Name Atbasch leitet sich dabei von den ersten zwei Buchstabenpaaren ab, die einander ersetzen (Aleph mit Taw und Beth mit Schin)
-Speziell an Atbasch ist, dass zum Entschlüsseln der gleiche Prozess benutzt werden kann wie zum Verschlüsseln, da die Buchstaben symmetrisch ausgetauscht werden.
+\subsubsection{Geschichte}
+\label{sec:c-geschichte}
+Die Caesar-Verschlüsselung wurde nach Gaius Julius Caesar benannt, der laut Überlieferung durch den römischen Schriftsteller Sueton eine solche Verschlüsselung mit einer Verschiebung von drei Stellen verwendet hat.
 
-(Beispiel einfügen)
+\begin{figure}[htb]  % Bild Caesar-Scheibe
+	\centering
+		\includegraphics[width=0.7\textwidth]{\BILDER Caesar-Scheibe}
+ 	\caption{Ein Exemplar der Caesar-Scheibe \cite{img:citekey}}
+  \label{fig:caesar-scheibe}
+\end{figure}
 
-\textbf{ROT13} ist eine weitere Variante der Caesar-Verschlüsselung die den gleichen Prozess zum Verschlüsseln und Entschlüsseln benutzt. Hier sind die Buchstaben zwar wie in der normalen Caesar-Verschlüsselung verschoben, aber genau um ein halbes Alphabet, also 13 Stellen. Wenn man also ein Buchstabe verschlüsselt (um 13 Stellen verschiebt) und entschlüsselt (um weitere 13 Stellen verschiebt), hat man den Buchstaben um insgesamt 26 Stellen, also ein ganzes Alphabet verschoben, womit man wieder beim Ausgangsbuchstaben landet.
+Im 15. Jahrhundert erfand Leon Battista Alberti, ein italienischer Schriftsteller, Architekt und Mathematiker, die Chiffrierscheibe, ein Werkzeug, welches die Nutzung der Caesar-Verschlüsselung vereinfacht. Eine solche Chiffrierscheibe besteht aus zwei runden, konzentrischen Scheiben, die so aneinander angebracht sind, dass die kleinere Scheibe sich auf der grösseren drehen kann. Entlang dem Rand der einen Scheibe sind alle Zeichen des Klartextalphabets angeschrieben und entlang dem Rand der anderen Scheibe alle Zeichen des Geheimalphabets. Für jede der verschiedenen Caesar-Verschlüsselungen müssen einfach die Scheiben in einen bestimmten Winkel zueinander gedreht werden. Dann können direkt die zueinander gehörenden Buchstaben abgelesen werden.
 
-(Beispiel einfügen)
+
+\subsubsection{Varianten}
+\label{sec:c-varianten}
+% kein Text
+
+\paragraph{Atbasch}
+\label{sec:c-atbasch}
+Atbasch ist eine ursprünglich auf dem hebräischen Alphabet basierende Variante der Caesar-Verschlüsselung, die auch als umgekehrte Caesar-Verschlüsselung bezeichnet wird. Statt die Buchstaben um eine bestimmte Anzahl Stellen zu verschieben, entspricht das Geheimalphabet lediglich dem Klartextalphabet, aber rückwärts. So wird A zu Z, B zu Y, und so weiter:
+
+\begin{table}[]
+\centering
+\caption{Tabula Recta der Atbasch-Verschlüsselung}
+\label{tab:tabula-recta-atbasch}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llllllllllllllllllllllllll}
+\hline
+\multicolumn{1}{|l|}{A} &
+  \multicolumn{1}{l|}{B} &
+  \multicolumn{1}{l|}{C} &
+  \multicolumn{1}{l|}{D} &
+  \multicolumn{1}{l|}{E} &
+  \multicolumn{1}{l|}{F} &
+  \multicolumn{1}{l|}{G} &
+  \multicolumn{1}{l|}{H} &
+  \multicolumn{1}{l|}{I} &
+  \multicolumn{1}{l|}{J} &
+  \multicolumn{1}{l|}{K} &
+  \multicolumn{1}{l|}{L} &
+  \multicolumn{1}{l|}{M} &
+  \multicolumn{1}{l|}{N} &
+  \multicolumn{1}{l|}{O} &
+  \multicolumn{1}{l|}{P} &
+  \multicolumn{1}{l|}{Q} &
+  \multicolumn{1}{l|}{R} &
+  \multicolumn{1}{l|}{S} &
+  \multicolumn{1}{l|}{T} &
+  \multicolumn{1}{l|}{U} &
+  \multicolumn{1}{l|}{V} &
+  \multicolumn{1}{l|}{W} &
+  \multicolumn{1}{l|}{X} &
+  \multicolumn{1}{l|}{Y} &
+  \multicolumn{1}{l|}{Z} \\ \hline
+$\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ \\ \hline
+\multicolumn{1}{|l|}{Z} &
+  \multicolumn{1}{l|}{Y} &
+  \multicolumn{1}{l|}{X} &
+  \multicolumn{1}{l|}{W} &
+  \multicolumn{1}{l|}{V} &
+  \multicolumn{1}{l|}{U} &
+  \multicolumn{1}{l|}{T} &
+  \multicolumn{1}{l|}{S} &
+  \multicolumn{1}{l|}{R} &
+  \multicolumn{1}{l|}{Q} &
+  \multicolumn{1}{l|}{P} &
+  \multicolumn{1}{l|}{O} &
+  \multicolumn{1}{l|}{N} &
+  \multicolumn{1}{l|}{M} &
+  \multicolumn{1}{l|}{L} &
+  \multicolumn{1}{l|}{K} &
+  \multicolumn{1}{l|}{J} &
+  \multicolumn{1}{l|}{I} &
+  \multicolumn{1}{l|}{H} &
+  \multicolumn{1}{l|}{G} &
+  \multicolumn{1}{l|}{F} &
+  \multicolumn{1}{l|}{E} &
+  \multicolumn{1}{l|}{D} &
+  \multicolumn{1}{l|}{C} &
+  \multicolumn{1}{l|}{B} &
+  \multicolumn{1}{l|}{A} \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+Der Name Atbasch leitet sich dabei von den ersten zwei Buchstabenpaaren des hebräischen Alphabets ab, die einander ersetzen (\textbf{A}leph und \textbf{T}aw und \textbf{B}eth und \textbf{Sch}in). Speziell an Atbasch ist, dass zum Entschlüsseln der gleiche Prozess benutzt werden kann wie zum Verschlüsseln, da die Buchstaben symmetrisch ausgetauscht werden.
+
+
+\paragraph{ROT13}
+\label{sec:c-rot13}
+ROT13 ist eine weitere Variante der Caesar-Verschlüsselung, die den gleichen Prozess zum Verschlüsseln und Entschlüsseln benutzt. Hier sind die Buchstaben zwar wie in der normalen Caesar-Verschlüsselung verschoben, aber genau um ein halbes Alphabet, also 13 Stellen. Wenn man also einen Buchstaben verschlüsselt (um 13 Stellen verschiebt) und noch einmal verschlüsselt (um weitere 13 Stellen verschiebt), hat man den Buchstaben um insgesamt 26 Stellen, also ein ganzes Alphabet verschoben, womit man wieder beim Ausgangsbuchstaben landet.
+
+\begin{table}[]
+\centering
+\caption{Tabula Recta der ROT13-Verschlüsselung}
+\label{tab:tabula-recta-rot13}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llllllllllllllllllllllllll}
+\hline
+\multicolumn{1}{|l|}{A} &
+  \multicolumn{1}{l|}{B} &
+  \multicolumn{1}{l|}{C} &
+  \multicolumn{1}{l|}{D} &
+  \multicolumn{1}{l|}{E} &
+  \multicolumn{1}{l|}{F} &
+  \multicolumn{1}{l|}{G} &
+  \multicolumn{1}{l|}{H} &
+  \multicolumn{1}{l|}{I} &
+  \multicolumn{1}{l|}{J} &
+  \multicolumn{1}{l|}{K} &
+  \multicolumn{1}{l|}{L} &
+  \multicolumn{1}{l|}{M} &
+  \multicolumn{1}{l|}{N} &
+  \multicolumn{1}{l|}{O} &
+  \multicolumn{1}{l|}{P} &
+  \multicolumn{1}{l|}{Q} &
+  \multicolumn{1}{l|}{R} &
+  \multicolumn{1}{l|}{S} &
+  \multicolumn{1}{l|}{T} &
+  \multicolumn{1}{l|}{U} &
+  \multicolumn{1}{l|}{V} &
+  \multicolumn{1}{l|}{W} &
+  \multicolumn{1}{l|}{X} &
+  \multicolumn{1}{l|}{Y} &
+  \multicolumn{1}{l|}{Z} \\ \hline
+$\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ &
+  $\updownarrow$ \\ \hline
+\multicolumn{1}{|l|}{N} &
+  \multicolumn{1}{l|}{O} &
+  \multicolumn{1}{l|}{P} &
+  \multicolumn{1}{l|}{Q} &
+  \multicolumn{1}{l|}{R} &
+  \multicolumn{1}{l|}{S} &
+  \multicolumn{1}{l|}{T} &
+  \multicolumn{1}{l|}{U} &
+  \multicolumn{1}{l|}{V} &
+  \multicolumn{1}{l|}{W} &
+  \multicolumn{1}{l|}{X} &
+  \multicolumn{1}{l|}{Y} &
+  \multicolumn{1}{l|}{Z} &
+  \multicolumn{1}{l|}{A} &
+  \multicolumn{1}{l|}{B} &
+  \multicolumn{1}{l|}{C} &
+  \multicolumn{1}{l|}{D} &
+  \multicolumn{1}{l|}{E} &
+  \multicolumn{1}{l|}{F} &
+  \multicolumn{1}{l|}{G} &
+  \multicolumn{1}{l|}{H} &
+  \multicolumn{1}{l|}{I} &
+  \multicolumn{1}{l|}{J} &
+  \multicolumn{1}{l|}{K} &
+  \multicolumn{1}{l|}{L} &
+  \multicolumn{1}{l|}{M} \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+Aufgrund ihrer Einfachheit wird ROT13 oft verwendet, um beispielsweise Spoiler im Internet unleserlich zu machen, sodass man sie nicht aus Versehen lesen kann.
+
 
 \newpage %VIGENERE			
 \subsection{Vigenère-Verschlüsselung}
+\label{sec:vigenere}
 Anders als bei der Cäsar-Verschlüsselung wird bei der Vigenère-Verschlüsselung ein Schlüssel in Kombination mit 26 Geheimalphabeten benutzt. Dabei wird der Schlüssel so oft wiederholt, bis er die Länge der zu verschlüsselnden Nachricht deckt.
 
-Geschichte
-sdftadfgdfg
+Im Grunde genommen wird für jeden Buchstaben des Klartexts eine neue Caesar-Verschlüsselung mit einer neuen Verschiebung verwendet, wobei die Verschiebung an jeder Stelle dem Buchstaben im Schlüssel an dieser Stelle entspricht.
 
-Sicherheit
-sdftsdfgdfg
 
-Varianten
-Die \textbf{Trithemius-Verschlüsselung} ist der Vorläufer der Vigenère-Verschlüsselung und wurde vom deutschen Autor und Mönch Johannes Trithemius im frühen 16. Jahrhundert zusammen mit der Tabula Recta erfunden. Für diese Verschlüsselung benutzt man auch die Tabula Recta aber im Vergleich zu der normalen Vigenère-Verschlüsselung benutzt man keinen Schlüssel, sondern man rückt bei jedem Buchstaben eine Zeile der Tabula Recta weiter nach unten. Im Grunde genommen ist die Trithemius-Verschlüsselung also eine Vigenère-Verschlüsselung mit einem fixen Schlüssel ABCDEFGHIJKLMNOPQRSTUVWXYZ.
+\subsubsection{Anwendungsbeispiel}
+\label{sec:v-anwendungsbeispiel}
+Um die Vigenère-Verschlüsselung effizient von Hand nutzen zu können, wird eine Tabula Recta (lat. Quadratische Tafel) verwendet. Diese ist eine Liste aller 26 möglichen Cäsar-Geheimalphabete:
 
-Da die Vigenère-Verschlüsselung nicht reziprok ist, das heisst dass das Vorgehen des Verschlüsselns nicht das gleiche ist wie das Vorgehen beim Entschlüsseln, kann man auch «in die falsche Richtung» verschlüsseln und den Klartext sozusagen «entschlüsseln», sodass man es nachher mit der normalen Verschlüsselungstechnik wieder entschlüsseln kann. Dies wird als Beaufort Variante bezeichnet und ist nicht zu verwechseln mit dem Beaufort-Chiffre.
+\begin{table}[]
+\centering
+\caption{Tabula Recta der Vigenère-Verschlüsselung}
+\label{tab:tabula-recta-vigenere}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|}
+\cline{2-27}
+ &
+  \textbf{A} &
+  \textbf{B} &
+  \textbf{C} &
+  \textbf{D} &
+  \textbf{E} &
+  \textbf{F} &
+  \textbf{G} &
+  \textbf{H} &
+  \textbf{I} &
+  \textbf{J} &
+  \textbf{K} &
+  \textbf{L} &
+  \textbf{M} &
+  \textbf{N} &
+  \textbf{O} &
+  \textbf{P} &
+  \textbf{Q} &
+  \textbf{R} &
+  \textbf{S} &
+  \textbf{T} &
+  \textbf{U} &
+  \textbf{V} &
+  \textbf{W} &
+  \textbf{X} &
+  \textbf{Y} &
+  \textbf{Z} \\ \hline
+\multicolumn{1}{|l|}{\textbf{A}} & A & B & C & D & E & F & G & H & I & J & K & L & M & N & O & P & Q & R & S & T & U & V & W & X & Y & Z \\ \hline
+\multicolumn{1}{|l|}{\textbf{B}} & B & C & D & E & F & G & H & I & J & K & L & M & N & O & P & Q & R & S & T & U & V & W & X & Y & Z & A \\ \hline
+\multicolumn{1}{|l|}{\textbf{C}} & C & D & E & F & G & H & I & J & K & L & M & N & O & P & Q & R & S & T & U & V & W & X & Y & Z & A & B \\ \hline
+\multicolumn{1}{|l|}{\textbf{D}} & D & E & F & G & H & I & J & K & L & M & N & O & P & Q & R & S & T & U & V & W & X & Y & Z & A & B & C \\ \hline
+\multicolumn{1}{|l|}{\textbf{E}} & E & F & G & H & I & J & K & L & M & N & O & P & Q & R & S & T & U & V & W & X & Y & Z & A & B & C & D \\ \hline
+\multicolumn{1}{|l|}{\textbf{F}} & F & G & H & I & J & K & L & M & N & O & P & Q & R & S & T & U & V & W & X & Y & Z & A & B & C & D & E \\ \hline
+\multicolumn{1}{|l|}{\textbf{G}} & G & H & I & J & K & L & M & N & O & P & Q & R & S & T & U & V & W & X & Y & Z & A & B & C & D & E & F \\ \hline
+\multicolumn{1}{|l|}{\textbf{H}} & H & I & J & K & L & M & N & O & P & Q & R & S & T & U & V & W & X & Y & Z & A & B & C & D & E & F & G \\ \hline
+\multicolumn{1}{|l|}{\textbf{I}} & I & J & K & L & M & N & O & P & Q & R & S & T & U & V & W & X & Y & Z & A & B & C & D & E & F & G & H \\ \hline
+\multicolumn{1}{|l|}{\textbf{J}} & J & K & L & M & N & O & P & Q & R & S & T & U & V & W & X & Y & Z & A & B & C & D & E & F & G & H & I \\ \hline
+\multicolumn{1}{|l|}{\textbf{K}} & K & L & M & N & O & P & Q & R & S & T & U & V & W & X & Y & Z & A & B & C & D & E & F & G & H & I & J \\ \hline
+\multicolumn{1}{|l|}{\textbf{L}} & L & M & N & O & P & Q & R & S & T & U & V & W & X & Y & Z & A & B & C & D & E & F & G & H & I & J & K \\ \hline
+\multicolumn{1}{|l|}{\textbf{M}} & M & N & O & P & Q & R & S & T & U & V & W & X & Y & Z & A & B & C & D & E & F & G & H & I & J & K & L \\ \hline
+\multicolumn{1}{|l|}{\textbf{N}} & N & O & P & Q & R & S & T & U & V & W & X & Y & Z & A & B & C & D & E & F & G & H & I & J & K & L & M \\ \hline
+\multicolumn{1}{|l|}{\textbf{O}} & O & P & Q & R & S & T & U & V & W & X & Y & Z & A & B & C & D & E & F & G & H & I & J & K & L & M & N \\ \hline
+\multicolumn{1}{|l|}{\textbf{P}} & P & Q & R & S & T & U & V & W & X & Y & Z & A & B & C & D & E & F & G & H & I & J & K & L & M & N & O \\ \hline
+\multicolumn{1}{|l|}{\textbf{Q}} & Q & R & S & T & U & V & W & X & Y & Z & A & B & C & D & E & F & G & H & I & J & K & L & M & N & O & P \\ \hline
+\multicolumn{1}{|l|}{\textbf{R}} & R & S & T & U & V & W & X & Y & Z & A & B & C & D & E & F & G & H & I & J & K & L & M & N & O & P & Q \\ \hline
+\multicolumn{1}{|l|}{\textbf{S}} & S & T & U & V & W & X & Y & Z & A & B & C & D & E & F & G & H & I & J & K & L & M & N & O & P & Q & R \\ \hline
+\multicolumn{1}{|l|}{\textbf{T}} & T & U & V & W & X & Y & Z & A & B & C & D & E & F & G & H & I & J & K & L & M & N & O & P & Q & R & S \\ \hline
+\multicolumn{1}{|l|}{\textbf{U}} & U & V & W & X & Y & Z & A & B & C & D & E & F & G & H & I & J & K & L & M & N & O & P & Q & R & S & T \\ \hline
+\multicolumn{1}{|l|}{\textbf{V}} & V & W & X & Y & Z & A & B & C & D & E & F & G & H & I & J & K & L & M & N & O & P & Q & R & S & T & U \\ \hline
+\multicolumn{1}{|l|}{\textbf{W}} & W & X & Y & Z & A & B & C & D & E & F & G & H & I & J & K & L & M & N & O & P & Q & R & S & T & U & V \\ \hline
+\multicolumn{1}{|l|}{\textbf{X}} & X & Y & Z & A & B & C & D & E & F & G & H & I & J & K & L & M & N & O & P & Q & R & S & T & U & V & W \\ \hline
+\multicolumn{1}{|l|}{\textbf{Y}} & Y & Z & A & B & C & D & E & F & G & H & I & J & K & L & M & N & O & P & Q & R & S & T & U & V & W & X \\ \hline
+\multicolumn{1}{|l|}{\textbf{Z}} & Z & A & B & C & D & E & F & G & H & I & J & K & L & M & N & O & P & Q & R & S & T & U & V & W & X & Y \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+Wenn man das Wort «BEISPIEL» nun mit dem Schlüssel «KEY» verschlüsseln will, beginnt man mit der ersten Stelle und verschlüsselt den Klartextbuchstaben «B» mit dem Schlüsselbuchstaben «K». Dazu wird zuerst der Klartextbuchstabe in der obersten Zeile und der Schlüsselbuchstabe in der Spalte ganz links gesucht und markiert. Nun wird der Buchstabe gesucht, der in derselben Spalte wie der markierte Klartextbuchstabe und in derselben Zeile wie der markierte Schlüsselbuchstabe steht. Dies ist der verschlüsselte Buchstabe. So erhält man den Geheimtext «LIGCTGOP».
+
+\begin{table}[]
+\centering
+\caption{Verschlüsselung des Wortes "Beispiel" nach Vigenère (Schlüssel: "KEY")}
+\label{tab:verschluesselung-vigenere-beispiel-key}
+\begin{tabular}{|l|llllllll|}
+\hline
+Klartext:   & B & E & I & S & P & I & E & L \\ \hline
+Schlüssel:  & K & E & Y & K & E & Y & K & E \\ \hline
+Geheimtext: & L & I & G & C & T & G & O & P \\ \hline
+\end{tabular}%
+\end{table}
+
+
+\subsubsection{Mathematische Darstellung}
+\label{sec:v-mathematische-darstellung}
+Die Vigenère-Verschlüsselung kann ebenfalls mathematisch dargestellt werden. Der einzige Unterschied zur mathematischen Darstellung der Cäsar-Verschlüsselung liegt darin, dass für die Verschlüsselung jedes einzelnen Klartextbuchstabens K\_{i} der entsprechende Schlüsselbuchstabe S\_{i} benutzt wird, anstatt eines konstanten Schlüsselbuchstabens. Die mathematischen Darstellungen für die Ver- und Entschlüsselung sehen also folgendermassen aus:
+
+%%%%% Mathematische Formel
+
+%%%%% Mathematische Formel
+
+
+\subsubsection{Sicherheit}
+\label{sec:v-sicherheit}
+Die Vigenère-Verschlüsselung galt lange als unknackbar, doch im Jahr 1854 gelang es Charles Babbage, einem englischen Mathematiker, Philosoph und Erfinder, eine mit Vigenère verschlüsselte Nachricht zu entziffern. Seine Methode hielt er jedoch geheim. Erst 1863 wurde von Friedrich Wilhelm Kasiski, einem preussischen Infanteriemajor, eine erfolgreiche Methode veröffentlicht. Dieses Verfahren ist heute als Kasiski-Test bekannt. Die mit dem Kasiski-Test ausgenutzten Schwachpunkte der Vigenère-Verschlüsselung sind die Wiederholung des Schlüssels, und die Einschränkung der möglichen Schlüssel auf bereits existierende Wörter. Durch Analyse von im Geheimtext mehrfach auftretenden Buchstabenfolgen kann die Länge des Schlüssels bestimmt werden, woraus man dann mit Statistik und etwas Ausprobieren auf den Schlüssel und den Klartext oder zumindest Teile davon schliessen kann.
+
+Um eine komplette Sicherheit zu gewährleisten, müsste der Schlüssel eine einzigartige Aneinanderreihung von zufälligen Buchstaben ohne jegliche Wiederholungen, mindestens so lange wie der Klartext und vollständig geheim sein. Diese Verschlüsselungstechnik ist bekannt als One Time Pad.
+
+
+\subsubsection{Varianten}
+\label{sec:v-varianten}
+% kein Text
+
+\paragraph{Trithemius-Verschlüsselung}
+\label{sec:v-trithemius}
+Die Verschlüsselung nach Trithemius ist der Vorläufer der Vigenère-Verschlüsselung und wurde vom deutschen Autor und Mönch Johannes Trithemius im frühen 16. Jahrhundert zusammen mit der Tabula Recta erfunden. Für diese Verschlüsselung benutzt man auch die Tabula Recta aber im Vergleich zu der normalen Vigenère-Verschlüsselung keinen Schlüssel, sondern man rückt bei jedem Buchstaben eine Zeile der Tabula Recta weiter nach unten. Im Grunde genommen ist die Trithemius-Verschlüsselung also eine Vigenère-Verschlüsselung mit einem fixen Schlüssel «ABCDEFGHIJKLMNOPQRSTUVWXYZ».
+
+\paragraph{Beaufort-Variante}
+\label{sec:v-beaufort-var}
+Da die Vigenère-Verschlüsselung nicht reziprok ist, das Vorgehen des Verschlüsselns also nicht dem Vorgehen des Entschlüsselns entspricht, kann man auch in die «falsche» Richtung verschlüsseln. Dazu wird auf den Klartext der Algorithmus zur Entschlüsselung nach Vigenère angewandt, um den Geheimtext zu erhalten, sodass man es nachher mit der normalen Verschlüsselungstechnik wieder entschlüsseln kann. Dies wird als Beaufort Variante bezeichnet und ist nicht zu verwechseln mit der Beaufort-Verschlüsselung.
+
+\paragraph{Beaufort-Verschlüsselung}
+\label{sec:v-beaufort-verschluesselung}
+Für die Beaufort-Verschlüsselung wird eine ähnliche Tabelle benutzt wie die Tabula Recta, allerdings ist darin das Alphabet rückwärts:
+
+\begin{table}[]
+\centering
+\caption{Tabula Recta der Beaufort-Verschlüsselung}
+\label{tab:tabula-recta-beaufort}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|}
+\cline{2-27}
+ &
+  \textbf{A} &
+  \textbf{B} &
+  \textbf{C} &
+  \textbf{D} &
+  \textbf{E} &
+  \textbf{F} &
+  \textbf{G} &
+  \textbf{H} &
+  \textbf{I} &
+  \textbf{J} &
+  \textbf{K} &
+  \textbf{L} &
+  \textbf{M} &
+  \textbf{N} &
+  \textbf{O} &
+  \textbf{P} &
+  \textbf{Q} &
+  \textbf{R} &
+  \textbf{S} &
+  \textbf{T} &
+  \textbf{U} &
+  \textbf{V} &
+  \textbf{W} &
+  \textbf{X} &
+  \textbf{Y} &
+  \textbf{Z} \\ \hline
+\multicolumn{1}{|l|}{\textbf{A}} & Z & Y & X & W & V & U & T & S & R & Q & P & O & N & M & L & K & J & I & H & G & F & E & D & C & B & A \\ \hline
+\multicolumn{1}{|l|}{\textbf{B}} & Y & X & W & V & U & T & S & R & Q & P & O & N & M & L & K & J & I & H & G & F & E & D & C & B & A & Z \\ \hline
+\multicolumn{1}{|l|}{\textbf{C}} & X & W & V & U & T & S & R & Q & P & O & N & M & L & K & J & I & H & G & F & E & D & C & B & A & Z & Y \\ \hline
+\multicolumn{1}{|l|}{\textbf{D}} & W & V & U & T & S & R & Q & P & O & N & M & L & K & J & I & H & G & F & E & D & C & B & A & Z & Y & X \\ \hline
+\multicolumn{1}{|l|}{\textbf{E}} & V & U & T & S & R & Q & P & O & N & M & L & K & J & I & H & G & F & E & D & C & B & A & Z & Y & X & W \\ \hline
+\multicolumn{1}{|l|}{\textbf{F}} & U & T & S & R & Q & P & O & N & M & L & K & J & I & H & G & F & E & D & C & B & A & Z & Y & X & W & V \\ \hline
+\multicolumn{1}{|l|}{\textbf{G}} & T & S & R & Q & P & O & N & M & L & K & J & I & H & G & F & E & D & C & B & A & Z & Y & X & W & V & U \\ \hline
+\multicolumn{1}{|l|}{\textbf{H}} & S & R & Q & P & O & N & M & L & K & J & I & H & G & F & E & D & C & B & A & Z & Y & X & W & V & U & T \\ \hline
+\multicolumn{1}{|l|}{\textbf{I}} & R & Q & P & O & N & M & L & K & J & I & H & G & F & E & D & C & B & A & Z & Y & X & W & V & U & T & S \\ \hline
+\multicolumn{1}{|l|}{\textbf{J}} & Q & P & O & N & M & L & K & J & I & H & G & F & E & D & C & B & A & Z & Y & X & W & V & U & T & S & R \\ \hline
+\multicolumn{1}{|l|}{\textbf{K}} & P & O & N & M & L & K & J & I & H & G & F & E & D & C & B & A & Z & Y & X & W & V & U & T & S & R & Q \\ \hline
+\multicolumn{1}{|l|}{\textbf{L}} & O & N & M & L & K & J & I & H & G & F & E & D & C & B & A & Z & Y & X & W & V & U & T & S & R & Q & P \\ \hline
+\multicolumn{1}{|l|}{\textbf{M}} & N & M & L & K & J & I & H & G & F & E & D & C & B & A & Z & Y & X & W & V & U & T & S & R & Q & P & O \\ \hline
+\multicolumn{1}{|l|}{\textbf{N}} & M & L & K & J & I & H & G & F & E & D & C & B & A & Z & Y & X & W & V & U & T & S & R & Q & P & O & N \\ \hline
+\multicolumn{1}{|l|}{\textbf{O}} & L & K & J & I & H & G & F & E & D & C & B & A & Z & Y & X & W & V & U & T & S & R & Q & P & O & N & M \\ \hline
+\multicolumn{1}{|l|}{\textbf{P}} & K & J & I & H & G & F & E & D & C & B & A & Z & Y & X & W & V & U & T & S & R & Q & P & O & N & M & L \\ \hline
+\multicolumn{1}{|l|}{\textbf{Q}} & J & I & H & G & F & E & D & C & B & A & Z & Y & X & W & V & U & T & S & R & Q & P & O & N & M & L & K \\ \hline
+\multicolumn{1}{|l|}{\textbf{R}} & I & H & G & F & E & D & C & B & A & Z & Y & X & W & V & U & T & S & R & Q & P & O & N & M & L & K & J \\ \hline
+\multicolumn{1}{|l|}{\textbf{S}} & H & G & F & E & D & C & B & A & Z & Y & X & W & V & U & T & S & R & Q & P & O & N & M & L & K & J & I \\ \hline
+\multicolumn{1}{|l|}{\textbf{T}} & G & F & E & D & C & B & A & Z & Y & X & W & V & U & T & S & R & Q & P & O & N & M & L & K & J & I & H \\ \hline
+\multicolumn{1}{|l|}{\textbf{U}} & F & E & D & C & B & A & Z & Y & X & W & V & U & T & S & R & Q & P & O & N & M & L & K & J & I & H & G \\ \hline
+\multicolumn{1}{|l|}{\textbf{V}} & E & D & C & B & A & Z & Y & X & W & V & U & T & S & R & Q & P & O & N & M & L & K & J & I & H & G & F \\ \hline
+\multicolumn{1}{|l|}{\textbf{W}} & D & C & B & A & Z & Y & X & W & V & U & T & S & R & Q & P & O & N & M & L & K & J & I & H & G & F & E \\ \hline
+\multicolumn{1}{|l|}{\textbf{X}} & C & B & A & Z & Y & X & W & V & U & T & S & R & Q & P & O & N & M & L & K & J & I & H & G & F & E & D \\ \hline
+\multicolumn{1}{|l|}{\textbf{Y}} & B & A & Z & Y & X & W & V & U & T & S & R & Q & P & O & N & M & L & K & J & I & H & G & F & E & D & C \\ \hline
+\multicolumn{1}{|l|}{\textbf{Z}} & A & Z & Y & X & W & V & U & T & S & R & Q & P & O & N & M & L & K & J & I & H & G & F & E & D & C & B \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+Beim Testen dieser Verschlüsselung fiel die Bildung von immer gleichen Buchstabentripeln auf, bei denen man immer auf den dritten Buchstaben schliessen kann, wenn zwei bekannt sind, egal wie die drei Buchstaben auf Klartext, Geheimtext und Schlüssel verteilt sind. Beispiele dieser Tripel sind AAZ, ABY, ACX etc. Dank dieser Tripel ist die Beaufort-Verschlüsselung reziprok und trotz ihrer Sicherheit relativ einfach von Hand zu benutzen, wenn man einmal die Tripel kennt. Da man die Reihenfolge der Buchstaben im Tripel in irgendeiner Reihenfolge lernen kann, könnten daraus auch gut Eselsbrücken gemacht werden.
+
+
+\paragraph{Gronsfeld-Verschlüsselung}
+\label{sec:v-gronsfeld}
+Für diese Variante der Vigenère-Verschlüsselung werden als Schlüssel keine Buchstaben, sondern Ziffern benutzt. Da es nur 10 Ziffern gibt, gibt es also auch nur 10 Schlüsselalphabete, was diese Verschlüsselung etwas unsicherer macht als die Vigenère-Verschlüsselung.
+
+\begin{table}[]
+\centering
+\caption{Tabula Recta der Gronsfeld-Verschlüsselung}
+\label{tab:tabula-recta-gronsfeld}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|}
+\cline{2-27}
+ &
+  \textbf{A} &
+  \textbf{B} &
+  \textbf{C} &
+  \textbf{D} &
+  \textbf{E} &
+  \textbf{F} &
+  \textbf{G} &
+  \textbf{H} &
+  \textbf{I} &
+  \textbf{J} &
+  \textbf{K} &
+  \textbf{L} &
+  \textbf{M} &
+  \textbf{N} &
+  \textbf{O} &
+  \textbf{P} &
+  \textbf{Q} &
+  \textbf{R} &
+  \textbf{S} &
+  \textbf{T} &
+  \textbf{U} &
+  \textbf{V} &
+  \textbf{W} &
+  \textbf{X} &
+  \textbf{Y} &
+  \textbf{Z} \\ \hline
+\multicolumn{1}{|l|}{\textbf{0}} & A & B & C & D & E & F & G & H & I & J & K & L & M & N & O & P & Q & R & S & T & U & V & W & X & Y & Z \\ \hline
+\multicolumn{1}{|l|}{\textbf{1}} & B & C & D & E & F & G & H & I & J & K & L & M & N & O & P & Q & R & S & T & U & V & W & X & Y & Z & A \\ \hline
+\multicolumn{1}{|l|}{\textbf{2}} & C & D & E & F & G & H & I & J & K & L & M & N & O & P & Q & R & S & T & U & V & W & X & Y & Z & A & B \\ \hline
+\multicolumn{1}{|l|}{\textbf{3}} & D & E & F & G & H & I & J & K & L & M & N & O & P & Q & R & S & T & U & V & W & X & Y & Z & A & B & C \\ \hline
+\multicolumn{1}{|l|}{\textbf{4}} & E & F & G & H & I & J & K & L & M & N & O & P & Q & R & S & T & U & V & W & X & Y & Z & A & B & C & D \\ \hline
+\multicolumn{1}{|l|}{\textbf{5}} & F & G & H & I & J & K & L & M & N & O & P & Q & R & S & T & U & V & W & X & Y & Z & A & B & C & D & E \\ \hline
+\multicolumn{1}{|l|}{\textbf{6}} & G & H & I & J & K & L & M & N & O & P & Q & R & S & T & U & V & W & X & Y & Z & A & B & C & D & E & F \\ \hline
+\multicolumn{1}{|l|}{\textbf{7}} & H & I & J & K & L & M & N & O & P & Q & R & S & T & U & V & W & X & Y & Z & A & B & C & D & E & F & G \\ \hline
+\multicolumn{1}{|l|}{\textbf{8}} & I & J & K & L & M & N & O & P & Q & R & S & T & U & V & W & X & Y & Z & A & B & C & D & E & F & G & H \\ \hline
+\multicolumn{1}{|l|}{\textbf{9}} & J & K & L & M & N & O & P & Q & R & S & T & U & V & W & X & Y & Z & A & B & C & D & E & F & G & H & I \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+Was ihre Sicherheit aber wieder verstärkt ist die zusätzliche Unvorhersehbarkeit, mit der zu rechnen ist, da der Schlüssel aus Ziffern besteht und deshalb kein existierendes Wort sein kann.
+
+
+\paragraph{Autokey-Verschlüsselung}
+\label{sec:v-autokey}
+Dies ist die eigentliche Methode, die Blaise de Vigenère, nach dem die Vigenère-Verschlüsselung benannt wurde, erfunden hat. Für die Autokey-Verschlüsselung wird ein Schlüssel verwendet, der automatisch länger ist als der Klartext. Dafür wird ein Vorschlüssel benutzt, der für die ersten paar Zeichen zum Verschlüsseln benutzt wird. Statt den Schlüssel so lange zu wiederholen, bis er die ganze Länge des Klartexts abdeckt, wird an den Schlüssel der Klartext angehängt. Hat man also einen fünfstelligen Schlüssel, wird für die Verschlüsselung der 6. Stelle des Klartextes, die erste Stelle des Klartextes als Schlüssel benutzt.
+
+
+\paragraph{Running Key-Verschlüsselung}
+\label{sec:v-running-key}
+Auch bei dieser Variante wird ein Schlüssel benutzt, der mindestens so lang ist wie der Klartext. Hier wird dafür einfach ein langer Schlüssel benutzt. Da diese aber schwieriger sind sich zu merken werden oft Passagen von Büchern oder öffentlichen Texten als Schlüssel benutzt. 
+
 
 
 

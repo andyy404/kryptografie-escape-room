@@ -184,7 +184,16 @@ KSA: Version vom 14.11.2019, C. von Arx
 \setlength{\bildBindung}{0cm}
 
 \newlength{\picwidth}
-\setlength{\picwidth}{1\paperwidth}
+\setlength{\picwidth}{\paperwidth}
+\addtolength{\picwidth}{-10.0mm}
+
+\newlength{\picheight}
+\setlength{\picheight}{0.375\paperheight}
+
+\newlength{\picposy}
+\setlength{\picposy}{\paperheight}
+\addtolength{\picposy}{-0.375\paperheight}
+\addtolength{\picposy}{-5.0mm}
 
 \newlength{\halbeSeite}
 \setlength{\halbeSeite}{0.5\paperheight}
@@ -194,6 +203,7 @@ KSA: Version vom 14.11.2019, C. von Arx
 \newlength{\poskantonslogo}
 \setlength{\poskantonslogo}{-1\hkantonslogo}
 \addtolength{\poskantonslogo}{\paperheight}
+\addtolength{\poskantonslogo}{-5.0mm}
 
 \newlength{\inhaltsbox}
 \setlength{\inhaltsbox}{0.75\paperwidth}
@@ -219,7 +229,7 @@ KSA: Version vom 14.11.2019, C. von Arx
 \put(0,0){% Untere linke Ecke
 \parbox[t][\paperheight]{\paperwidth}{%
 \parbox[t][0pt]{0pt} % Hintergrundbild
-	{\rule{\bildBindung}{0pt}\raisebox{\halbeSeite}{\includegraphics[height=\halbeSeite, width=\picwidth]{\maTitelbild}}
+	{\rule{\bildBindung}{0pt}\raisebox{\picposy}{\includegraphics[height=\picheight, width=\picwidth]{\maTitelbild}}
 	}%
 \posstrut
 \parbox[t][0pt]{0pt} % Kantonslogo
