@@ -2,7 +2,6 @@ import pygame, Setup
 
 class Timer():
     def __init__(self, starting_time):
-        self.running = False
         self.time = starting_time
 
         self.coord_upper = int(Setup.h/27*1.5)
@@ -87,16 +86,16 @@ class Timer():
             (self.coord_right + modifier, self.coord_upper),
             (self.coord_right + modifier, self.coord_lower)), 4)
 
-    def eight(self, modifier, color = Setup.color_theme[1], thickness = 4):
+    def eight(self, modifier):
 
-        pygame.draw.lines(Setup.screen, color, True, (
+        pygame.draw.lines(Setup.screen, Setup.color_theme[1], True, (
             (self.coord_left + modifier, self.coord_upper),
             (self.coord_right + modifier, self.coord_upper),
             (self.coord_right + modifier, self.coord_middle),
             (self.coord_left + modifier, self.coord_middle),
             (self.coord_right + modifier, self.coord_middle),
             (self.coord_right + modifier, self.coord_lower),
-            (self.coord_left + modifier, self.coord_lower)), thickness)
+            (self.coord_left + modifier, self.coord_lower)), 4)
 
     def nine(self, modifier):
         pygame.draw.lines(Setup.screen, Setup.color_theme[1], False, (
@@ -117,25 +116,20 @@ class Timer():
             else:
                 modifier = int(i * Setup.h/27*1.5 + Setup.h/27*0.5)
 
-            self.eight(modifier, Setup.color_theme[2], 4)
             self.draw_functions[time](modifier)
 
-        if (((self.time - self.time % 30) / 30) % 60) % 2 == 0:
-            pygame.draw.rect(Setup.screen, Setup.color_theme[1], self.point_upper)
-            pygame.draw.rect(Setup.screen, Setup.color_theme[1], self.point_lower)
+        pygame.draw.rect(Setup.screen, Setup.color_theme[1], self.point_upper)
+        pygame.draw.rect(Setup.screen, Setup.color_theme[1], self.point_lower)
 
     def update(self):
-        seconds = ((self.time - self.time % 60) / 60) % 60
+        seconds = (self.time // 60) % 60
         single_seconds = seconds % 10
-        ten_seconds = (seconds - seconds % 10) / 10
+        ten_seconds = seconds // 10
 
-        minutes = (((self.time - self.time % 60) / 60) - seconds) / 60
+        minutes = self.time // 3600
         single_minutes = minutes % 10
-        ten_minutes = (minutes - minutes % 10) / 10
+        ten_minutes = minutes // 10
 
         self.times_list = [int(ten_minutes), int(single_minutes), int(ten_seconds), int(single_seconds)]
 
-        self.draw()
-
-        if self.running:
-            self.time -= 1
+        self.time -= 1

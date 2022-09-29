@@ -1,5 +1,6 @@
 import pygame, Setup
 from pygame.locals import *
+import time
 
 def check_inputs():
     global running, mbdown, mbup, mx, my, click
@@ -13,6 +14,8 @@ def check_inputs():
             mbdown = True
         if ev.type == MOUSEBUTTONUP: # checks whether a mouse button has been released during the current frame
             mbup = True
+        if ev.type == KEYDOWN:
+            pygame.image.save(Setup.screen, "screenshot" + str(time.time()) + ".png")
 
     mx, my = pygame.mouse.get_pos() # gets current cursor coordinates
     click = pygame.mouse.get_pressed()[0] # checks  wether the left mouse button is currently pressed down or not
