@@ -1,21 +1,21 @@
-0. Abstract
+0. Abstract ✓
 	- Überblick
 	- Was habe ich gemacht, was ist dabei herausgekommen, was bedeutet dieses Resultat
-1. Vorwort
+1. Vorwort ✓
 	- Beweggründe (Wie bin ich zum Thema gekommen)
 	- Danksagung (Wem will ich wie danken)
-2. Einleitung/Problemstellung
+2. Einleitung/Problemstellung ✓
 	- Was ist mein Thema
 	- Erklärung und Relevanz meines Themas
 	- Was ist mein Ziel
 	- gelantes Vorgehen
 	- verwendete Software
-3. Behandelte Kryptografische Methoden
+3. Behandelte Kryptografische Methoden ✓
 	- Wie funktioniert es
 	- Kurze Geschichte
 	- Sicherheit
 	- Variationen
-4. Das Escape Room Spiel
+4. Das Escape Room Spiel ✓
 	4.1. Benutzeroberfläche
 		- wie bedient man das spiel?
 		- screenshots des programms
@@ -31,12 +31,13 @@
 				- neue objekt subtypen
 			- neue Räume
 			- neue Methoden
-5. Reflexion und Ausblick aka Schlusswort
+5. Reflexion und Ausblick aka Schlusswort ✓
 	- was ging gut
 		- motivation
 	- was ging nicht gut
 		- oop (neu lernen)
 		- original mit drehen und so
+		- hints
 		- zeitmanagement
 		- probleme auseinanderbrehchen in kleine machbare stücke in einer sinnvollen reihenfolge und nicht 17 sachen gleichzeitig falsch machen
 		- übresicht im code
