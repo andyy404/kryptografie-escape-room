@@ -11,8 +11,8 @@
 
 
 %___________________________ Definitionen des Literaturverzeichnisses ________
-\usepackage[style=numeric,natbib=true,doi=true,url=true,isbn=true,sorting=none,backend=biber]{biblatex}    % Quellen mit Nummern 
-%\usepackage[style=chem-angew,natbib=true,doi=true,url=true,sorting=none,backend=biber,isbn=true]{biblatex} % von der Chemie bevorzugt
+%\usepackage[style=numeric,natbib=true,doi=true,url=true,isbn=true,sorting=none,backend=biber]{biblatex}    % Quellen mit Nummern 
+\usepackage[style=chem-angew,natbib=true,doi=true,url=true,sorting=none,backend=biber,isbn=true]{biblatex} % von der Chemie bevorzugt
 
 %\usepackage[style=ext-authoryear-icomp,natbib=true,doi=true,url=true,isbn=true,backend=biber]{biblatex}    % AutorIn, Jahr 
 %\DeclareOuterCiteDelim{parencite}{\bibopenbracket}{\bibclosebracket} % (nur zusammen mit style=ext-authoryear-icomp) aktivieren für eckige Klammern
@@ -102,7 +102,8 @@
 
 %________________________ Quellen    _________________________________________
 %\renewcommand\refname{Literaturverzeichnis} 
- \printbibliography 
+\printbibliography 
+
 %________________________ Abbildungsverzeichnis    ___________________________
 \BemerkungLoFig{Abbildungen ohne Quellenangaben wurden von der Autorin selbst erstellt.}
 \listoffigures
@@ -114,6 +115,7 @@
 %________________________ Redlichkeitserklärung    ___________________________
 \newpage
 \maRedlichkeit
+
 %________________________ Anhang    __________________________________________
 %\appendix\newpage
 %\include{Anhang}		% Name des Files
